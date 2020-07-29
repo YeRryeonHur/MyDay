@@ -3,6 +3,7 @@ package com.example.myday1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,9 +50,9 @@ public class list_3page extends Activity {
     private Context context;
     ListView listview;
     FrameLayout frame;
-    Button fab , btn4, btn2;
+    Button fab , btn4, btn2, btn1, btn3;
     String date1="", date2="";
-    int day=0, emotii=0, emojic=0, day_write=0, year_a, month_a, day_a;
+    int day=0, emotii=0, emojic=0, day_write=0, year_a, month_a, day_a, color=0;
     listAdapter adapter;
     ArrayList<Data> list;
     ArrayList<String> keys;
@@ -64,10 +65,23 @@ public class list_3page extends Activity {
         list = new ArrayList<Data>();
         adapter = new listAdapter(list);
         btn4 = findViewById(R.id.btn4);
+        btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
+        fab= (Button)findViewById(R.id.fab);
         listview = findViewById(R.id.listv);
         listview.setAdapter(adapter);
-
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 0);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
+        fab.setBackgroundColor(color);
         keys = PreferenceManager.getArray(this, "key_list");
         for(int i = keys.size() - 1; i > -1; i--){
             day = Integer.parseInt(keys.get(i));
@@ -83,7 +97,7 @@ public class list_3page extends Activity {
             list.add(new Data(day, emotii));
         }
 */
-        fab= (Button)findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

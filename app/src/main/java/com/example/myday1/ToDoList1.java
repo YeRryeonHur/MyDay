@@ -18,9 +18,10 @@ import java.util.ArrayList;
 
 public class ToDoList1 extends AppCompatActivity {
 
-    Button btn;
-    TextView memotext, btn3;
+    Button btn, start_btn;
+    TextView memotext, btn3, btn1, btn2, btn4;
     Intent it;
+    int color=100;
     final static int CODE = 1;
     boolean std = false, bok = false, brk = false, fod = false, exe = false;
     public static ArrayList<String> list = new ArrayList<String>();
@@ -29,11 +30,41 @@ public class ToDoList1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.to_do_list1);
+        start_btn=(Button)findViewById(R.id.startbtn);
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
+        btn4 = (Button)findViewById(R.id.btn4);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 100);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
+        start_btn.setBackgroundColor(color);
+        start_btn.setAlpha(0.8f);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                startActivity(intent);
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
             }
         });

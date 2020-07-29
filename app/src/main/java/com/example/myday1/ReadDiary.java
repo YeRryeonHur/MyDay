@@ -20,9 +20,9 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class ReadDiary extends AppCompatActivity {
-    int key_int;
+    int key_int, color=100;
     String KEY;
-    Button btn4;
+    Button btn4, btn1, btn2;
     Context context = this;
     ArrayList<String> keys;
     Button btn3;
@@ -30,8 +30,20 @@ public class ReadDiary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reading_page);
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
-        btn4 = (Button) findViewById(R.id.btn4);
+        btn4 = (Button)findViewById(R.id.btn4);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 100);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
         //KEY값 받아오기
         Intent it = getIntent();
         key_int = it.getIntExtra("day_check", 0);

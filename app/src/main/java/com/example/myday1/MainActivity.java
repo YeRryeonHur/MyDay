@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
     Date date;
     SimpleDateFormat curYearFormat;
     SimpleDateFormat curMonthFormat;
-    int showM,showY;
+    int showM,showY, color=0;
     int test=0;
     int dayNum;
     int day;
     Integer today;
     Integer nowMonth;
-    Button btn3, btn1, btn2, btn4, col_change;
+    Button btn3, btn1, btn2, btn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,16 @@ public class MainActivity extends AppCompatActivity {
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
-        col_change = (Button)findViewById(R.id.change);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 0);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
         // 오늘 날짜를 세팅 해준다.
         long now = System.currentTimeMillis();
 

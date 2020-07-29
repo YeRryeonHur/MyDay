@@ -2,6 +2,7 @@ package com.example.myday1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -27,14 +28,31 @@ public class NewWriting extends AppCompatActivity {
     int data_date;
     String KEY_date;
     ArrayList<String> keys;
-    Button btn3;
+    Button btn3, btn1, btn2, btn4, save_diary;
+    int color=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.writing_page);
-        btn3 = (Button)findViewById(R.id.btn3);
         TextView tv = (TextView)findViewById(R.id.today_date);
         Date current = Calendar.getInstance().getTime();
+
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
+        btn3 = (Button)findViewById(R.id.btn3);
+        btn4 = (Button)findViewById(R.id.btn4);
+        save_diary= (Button)findViewById(R.id.save_diary);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 0);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
+        save_diary.setBackgroundColor(color);
 
         SimpleDateFormat YEAR = new SimpleDateFormat("yy", Locale.getDefault());
         SimpleDateFormat MONTH = new SimpleDateFormat("MM", Locale.getDefault());

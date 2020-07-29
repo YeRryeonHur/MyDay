@@ -32,8 +32,9 @@ public class ToDoList2 extends AppCompatActivity {
     public static ArrayList<ListViewItem> sendArr = new ArrayList<ListViewItem>();
     private ListView listView;
     private MyAdapter Adapter;
-    Button btn3;
+    Button btn3, btn1, btn2, btn4;
     private TextView output;
+    int color=100;
     private Button completebtn,stopbtn;
     public static boolean flag=true;
 
@@ -51,8 +52,20 @@ public class ToDoList2 extends AppCompatActivity {
         setContentView(R.layout.to_do_list2);
         saveData();
         loadData("listitem");
-
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
+        btn4 = (Button)findViewById(R.id.btn4);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 0);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

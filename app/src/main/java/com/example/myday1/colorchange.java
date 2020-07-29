@@ -1,6 +1,8 @@
 package com.example.myday1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +19,7 @@ public class colorchange extends AppCompatActivity {
     private Button button, btn1, btn2, btn3, btn4, col_change;
     private LinearLayout layout1, layout2, layout3;
     private TextView top;
-
+    int color = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,18 @@ public class colorchange extends AppCompatActivity {
         layout2 = (LinearLayout) findViewById(R.id.middle);
         layout3 = (LinearLayout) findViewById(R.id.bottom);
 
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 0);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
+        col_change.setBackgroundColor(color);
+        col_change.setAlpha(0.5f);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +70,16 @@ public class colorchange extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btn4.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), colorchange.class);
+                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
             }
         });
+
+
+
 
     }
 
@@ -105,7 +122,10 @@ public class colorchange extends AppCompatActivity {
                         btn4.setAlpha(0.93f);
                         col_change.setBackgroundColor(color);
                         col_change.setAlpha(0.5f);
-
+                        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putInt("key2", color);
+                        editor.commit();
                     }
 
                     @Override
@@ -113,6 +133,8 @@ public class colorchange extends AppCompatActivity {
                         // Cancel 버튼 클릭 시 이벤트
                     }
                 }).show();  // dialog 생성
+
+
     }
 
 

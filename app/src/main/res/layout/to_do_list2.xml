@@ -87,7 +87,7 @@
             android:clickable="true"
             android:onClick="home"
             android:text="home"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             />
         <Button
             android:id="@+id/btn2"
@@ -96,22 +96,21 @@
             android:clickable="true"
             android:onClick="schedule"
             android:text="schedule"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#000000"/>
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:text="Diary"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#000000"/>
         <Button
             android:id="@+id/btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="setting"
             android:text="setting"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#000000"/>
 
     </LinearLayout>
 
