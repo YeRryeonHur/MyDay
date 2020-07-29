@@ -32,7 +32,7 @@ public class ToDoList2 extends AppCompatActivity {
     public static ArrayList<ListViewItem> sendArr = new ArrayList<ListViewItem>();
     private ListView listView;
     private MyAdapter Adapter;
-
+    Button btn3;
     private TextView output;
     private Button completebtn,stopbtn;
     public static boolean flag=true;
@@ -52,6 +52,14 @@ public class ToDoList2 extends AppCompatActivity {
         saveData();
         loadData("listitem");
 
+        btn3 = (Button)findViewById(R.id.btn3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                startActivity(intent);
+            }
+        });
         output = findViewById(R.id.time_out);
         completebtn = findViewById(R.id.completebtn);
         stopbtn = findViewById(R.id.stopbtn);

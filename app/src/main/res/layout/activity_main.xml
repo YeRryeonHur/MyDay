@@ -80,26 +80,32 @@
             android:id="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:onClick="home"/>
+            android:text="home"
+            android:textColor="#FFFFFF"/>
         <Button
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="schedule"/>
+            android:onClick="schedule"
+            android:text="schedule"
+            android:textColor="#FFFFFF"/>
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="diary"/>
+            android:onClick="diary"
+            android:text="Diary"
+            android:textColor="#FFFFFF"/>
         <Button
             android:id="@+id/btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="setting"/>
+            android:onClick="setting"
+            android:text="setting"
+            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 

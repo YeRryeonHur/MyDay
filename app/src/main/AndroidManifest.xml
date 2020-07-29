@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".ToDoList1"/>
         <activity android:name=".ToDoList2"/>
+        <activity android:name=".colorchange"/>
+        <activity android:name=".NewWriting"/>
+        <activity android:name=".ReadDiary"/>
+        <activity android:name=".list_3page"/>
 
     </application>
 

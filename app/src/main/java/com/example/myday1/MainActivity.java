@@ -10,6 +10,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,21 +60,31 @@ public class MainActivity extends AppCompatActivity {
     int day;
     Integer today;
     Integer nowMonth;
-
+    Button btn3, btn1, btn2, btn4, col_change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         tvDate = (TextView)findViewById(R.id.tv_date);
         gridView = (GridView)findViewById(R.id.gridview);
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
+        btn3 = (Button)findViewById(R.id.btn3);
+        btn4 = (Button)findViewById(R.id.btn4);
+        col_change = (Button)findViewById(R.id.change);
         // 오늘 날짜를 세팅 해준다.
         long now = System.currentTimeMillis();
 
         date = new Date(now);
 
-
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                startActivity(intent);
+            }
+        });
         //연,월,일을 따로 저장
         curYearFormat = new SimpleDateFormat("yyyy");
         curMonthFormat = new SimpleDateFormat("MM");
@@ -321,17 +333,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void home(View v){
-
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
     public void schedule(View v){
-        Intent it=new Intent(this,ToDoList1.class);
+        Intent it=new Intent(getApplicationContext(),ToDoList1.class);
         startActivity(it);
     }
-    public void diary(){
-
+    public void setting(View v){
+        Intent intent = new Intent(getApplicationContext(), colorchange.class);
+        startActivity(intent);
     }
-    public void setting(){
 
-    }
+
 
 }

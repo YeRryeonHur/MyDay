@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ToDoList1 extends AppCompatActivity {
 
     Button btn;
-    TextView memotext;
+    TextView memotext, btn3;
     Intent it;
     final static int CODE = 1;
     boolean std = false, bok = false, brk = false, fod = false, exe = false;
@@ -29,7 +29,14 @@ public class ToDoList1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.to_do_list1);
-
+        btn3 = (Button)findViewById(R.id.btn3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                startActivity(intent);
+            }
+        });
         memotext = findViewById(R.id.memo);
         memotext.setMovementMethod(new ScrollingMovementMethod());
         loadData();
@@ -41,6 +48,8 @@ public class ToDoList1 extends AppCompatActivity {
             else if(list.get(i).equals("운동하기")) exe=true;
             memotext.append(list.get(i) + "\n");
         }
+
+
     }
 
     public void settext(String str) {
