@@ -320,4 +320,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void home(View v){
+
+    }
+    public void schedule(View v){
+        Intent it=new Intent(this,ToDoList1.class);
+        startActivity(it);
+    }
+    public void diary(){
+
+    }
+    public void setting(){
+
+    }
+
 }
