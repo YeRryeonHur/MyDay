@@ -26,12 +26,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ToDoList2 extends AppCompatActivity {
     public static ArrayList<ListViewItem> sendArr = new ArrayList<ListViewItem>();
     private ListView listView;
     private MyAdapter Adapter;
+    private String doingnow, start_time, finish_time; //지금 하고 있는 것
     Button btn3, btn1, btn2, btn4;
     private TextView output;
     int color=100;
@@ -50,7 +53,7 @@ public class ToDoList2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.to_do_list2);
-        saveData();
+        saveData2();
         loadData("listitem");
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
@@ -66,11 +69,29 @@ public class ToDoList2 extends AppCompatActivity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), colorchange.class);
+                startActivity(intent);
+                finish();
             }
         });
         output = findViewById(R.id.time_out);
@@ -78,44 +99,12 @@ public class ToDoList2 extends AppCompatActivity {
         stopbtn = findViewById(R.id.stopbtn);
 
         Intent intent = getIntent();
-
-        // receiveArr = intent.getStringArrayListExtra("list");
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);
 
         listView = findViewById(R.id.list);
         listView.setAdapter(Adapter);
         listView.invalidate();
 
-    }
-
-    class ListViewItem{
-        private int type;
-        ArrayList<ListViewItem> listViewItemList;
-
-        public ListViewItem(String namestr, String timestr) {
-            this.namestr = namestr;
-            this.timestr = timestr;
-        }
-
-        private String namestr; //일정 이름
-        private String timestr; //걸린 시간
-
-
-        public void setName(String Name) {
-            namestr = Name;
-        }
-
-        public void setTime(String Time) {
-            timestr = Time;
-        }
-
-        public String getName() {
-            return this.namestr;
-        }
-
-        public String getTime() {
-            return this.timestr;
-        }
     }
 
 
@@ -179,9 +168,14 @@ public class ToDoList2 extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //intent(pos);
+                                    doingnow=(String)Adapter.getItem(pos);
                                     finalConvertView.setBackgroundColor(Color.CYAN);
                                     myBaseTime = SystemClock.elapsedRealtime();
                                     myTimer.sendEmptyMessage(0);
+                                    long now=System.currentTimeMillis();
+                                    Date mDate=new Date(now);
+                                    SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm:ss");
+                                    start_time=simpleDate.format(mDate);
                                     cur_Status=Run;
                                 }
                             })
@@ -224,7 +218,7 @@ public class ToDoList2 extends AppCompatActivity {
                                             Adapter.notifyDataSetChanged();
                                         }
                                     } else {
-                                        listView.setBackgroundColor(Color.YELLOW);
+                                        listView.setBackgroundColor(Color.CYAN);
                                     }
                                 }
                             })
@@ -267,20 +261,18 @@ public class ToDoList2 extends AppCompatActivity {
     }
 
 
-    public void saveData() {
+    public void saveData2() {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(ToDoList1.list);
         editor.putString("listitem2", json);
         editor.apply();
-
     }
     @Override
     protected void onResume() {
         super.onResume();
-
-        saveData();
+        saveData2();
     }
 
 
@@ -292,7 +284,7 @@ public class ToDoList2 extends AppCompatActivity {
                     case Init:
                         flag = true;
                         myBaseTime = SystemClock.elapsedRealtime();
-                        System.out.println(myBaseTime);
+                       // System.out.println(myBaseTime);
                         myTimer.sendEmptyMessage(0);
 
                         stopbtn.setText("일시정지");
@@ -314,18 +306,25 @@ public class ToDoList2 extends AppCompatActivity {
                         myBaseTime += (now - myPauseTime);
                         stopbtn.setText("일시정지");
                         cur_Status = Run;
-
                         break;
                 }
                 break;
             case R.id.completebtn:
                 flag = false;
                 myTimer.removeMessages(0);
-                String str = output.getText().toString();
+                long now=System.currentTimeMillis();
+                Date mDate=new Date(now);
+                SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm:ss");
+                finish_time=simpleDate.format(mDate);
 
+                /**
+                 *sendArr에 저장 (한 일, 시작 시각, 나중시각)
+                 */
+                ListViewItem item=new ListViewItem(doingnow,start_time+","+finish_time);
+                sendArr.add(item);
 
                 listView.setAdapter(Adapter);
-                saveData();
+                saveData1();
 
                 output.setText("00 : 00 : 00");
                 cur_Status = Init;
@@ -357,4 +356,12 @@ public class ToDoList2 extends AppCompatActivity {
         return real_outTime;
     }
 
+    private void saveData1() {
+        SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(sendArr);
+        editor.putString("listitem", json);
+        editor.apply();
+    }
 }

@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoList1 extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class ToDoList1 extends AppCompatActivity {
     int color=100;
     final static int CODE = 1;
     boolean std = false, bok = false, brk = false, fod = false, exe = false;
-    public static ArrayList<String> list = new ArrayList<String>();
+    public static ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class ToDoList1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,7 @@ public class ToDoList1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                finish();
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,7 @@ public class ToDoList1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
+                finish();
             }
         });
         memotext = findViewById(R.id.memo);
@@ -139,7 +143,6 @@ public class ToDoList1 extends AppCompatActivity {
             case R.id.startbtn:
                 String[] str = memotext.getText().toString().split("\n");
                 if (!(str[0].equals(""))) {
-
                     list.clear();
                     for (int i = 0; i < str.length; i++) {
                         if(str[i].equals("")) continue;
@@ -154,25 +157,6 @@ public class ToDoList1 extends AppCompatActivity {
         }
     }
 
-  /*  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    String edtAddr = data.getStringExtra("TEXT");
-                    String[] str=edtAddr.split("\n");
-                    for(int i=0;i<str.length;i++)
-                    {
-                        if(str[i].equals("")) continue;
-                        memotext.append(str[i]+"\n");
-                    }
-                } else {
-
-                }
-                break;
-        }
-    }*/
 
     public void loadData()  {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
