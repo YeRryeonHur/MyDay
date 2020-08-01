@@ -2,7 +2,7 @@ package com.example.myday1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
@@ -19,13 +20,17 @@ public class colorchange extends AppCompatActivity {
     private Button button, btn1, btn2, btn3, btn4, col_change;
     private LinearLayout layout1, layout2, layout3;
     private TextView top;
+    TextView tv1;
     int color = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base);
-
-        top = (TextView)findViewById(R.id.top_text);
+        int list = ((MainActivity)MainActivity.context).list;
+        Resources resources = getResources();
+        String []arr = resources.getStringArray(R.array.goodsaying);
+        tv1 = (TextView)findViewById(R.id.saying);
+        tv1.setText(arr[list]);
         button = (Button) findViewById(R.id.change);
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
@@ -77,8 +82,6 @@ public class colorchange extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
 
     }

@@ -48,6 +48,14 @@ public class ReadDiary extends AppCompatActivity {
         Intent it = getIntent();
         key_int = it.getIntExtra("day_check", 0);
         KEY = Integer.toString(key_int);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                startActivity(intent);
+            }
+        });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

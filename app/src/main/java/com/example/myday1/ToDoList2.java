@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +41,7 @@ public class ToDoList2 extends AppCompatActivity {
     int color=100;
     private Button completebtn,stopbtn;
     public static boolean flag=true;
-
+    TextView tv1;
     final static int Init = 0;
     final static int Run = 1;
     final static int Pause = 2;
@@ -69,7 +70,11 @@ public class ToDoList2 extends AppCompatActivity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
-
+        int list = ((MainActivity)MainActivity.context).list;
+        Resources resources = getResources();
+        String []arr = resources.getStringArray(R.array.goodsaying);
+        tv1 = (TextView)findViewById(R.id.saying);
+        tv1.setText(arr[list]);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +99,14 @@ public class ToDoList2 extends AppCompatActivity {
                 finish();
             }
         });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), colorchange.class);
+                startActivity(intent);
+            }
+        });
+
         output = findViewById(R.id.time_out);
         completebtn = findViewById(R.id.completebtn);
         stopbtn = findViewById(R.id.stopbtn);

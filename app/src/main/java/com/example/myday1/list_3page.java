@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class list_3page extends Activity {
     listAdapter adapter;
     ArrayList<Data> list;
     ArrayList<String> keys;
+    TextView tv1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +130,11 @@ public class list_3page extends Activity {
                 startActivity(intent);
             }
         });
+        int list = ((MainActivity)MainActivity.context).list;
+        Resources resources = getResources();
+        String []arr = resources.getStringArray(R.array.goodsaying);
+        tv1 = (TextView)findViewById(R.id.saying);
+        tv1.setText(arr[list]);
 
         //일기버튼 추가 or 안보이게
         Button go_writing = (Button)findViewById(R.id.fab);
@@ -209,8 +216,9 @@ public class list_3page extends Activity {
 
         keys = PreferenceManager.getArray(this, "key_list");
 
-        for(int i = keys.size() - 1; i > -1; i++){
-            if(keys.get(i).equals(today)) return true;
+        for(int i = keys.size() - 1; i > -1; i--){
+            if(keys.get(i).equals(today))
+            return true;
         }
         return false;
     }

@@ -42,6 +42,7 @@ public class NewWriting extends AppCompatActivity {
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
         save_diary= (Button)findViewById(R.id.save_diary);
+
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
         btn1.setBackgroundColor(color);

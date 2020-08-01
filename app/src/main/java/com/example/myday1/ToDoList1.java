@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -20,7 +21,8 @@ import java.util.List;
 public class ToDoList1 extends AppCompatActivity {
 
     Button btn, start_btn;
-    TextView memotext, btn3, btn1, btn2, btn4;
+    TextView memotext, tv1;
+    Button btn3, btn1, btn2, btn4;
     Intent it;
     int color=100;
     final static int CODE = 1;
@@ -72,6 +74,11 @@ public class ToDoList1 extends AppCompatActivity {
                 finish();
             }
         });
+        int list2 = ((MainActivity)MainActivity.context).list;
+        Resources resources = getResources();
+        String []arr = resources.getStringArray(R.array.goodsaying);
+        tv1 = (TextView)findViewById(R.id.saying);
+        tv1.setText(arr[list2]);
         memotext = findViewById(R.id.memo);
         memotext.setMovementMethod(new ScrollingMovementMethod());
         loadData();

@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,10 +58,13 @@ public class MainActivity extends AppCompatActivity {
     int showM,showY, color=0;
     int test=0;
     int dayNum;
+    public int list;
     int day;
     Integer today;
     Integer nowMonth;
     Button btn3, btn1, btn2, btn4;
+    TextView tv1;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
+        tv1 = (TextView)findViewById(R.id.saying);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
         btn1.setBackgroundColor(color);
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
+
                 startActivity(intent);
             }
         });
@@ -147,8 +153,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
+        list = (showM*30+dayNum)%100;
+        context = this;
+        Resources resources = getResources();
+        String []arr = resources.getStringArray(R.array.goodsaying);
+        tv1.setText(arr[list]);
     }
 
 
@@ -356,6 +365,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
 
 
