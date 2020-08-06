@@ -39,15 +39,15 @@
             <Button
                 android:id="@+id/studybtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
 
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="공부하기"
+                android:onClick="btnMain"
 
-                android:textSize="20sp"
-                android:onClick="btnMain"/>
+                android:text="공부하기"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/foodbtn"
@@ -128,7 +128,7 @@
         </LinearLayout>
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5">
 
@@ -153,7 +153,8 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
-                android:layout_marginRight="55dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:onClick="btnMain"
                 android:text="START"

@@ -350,11 +350,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void home(View v){
+    /*public void home(View v){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
-    }
+    }*/
     public void schedule(View v){
         Intent it=new Intent(getApplicationContext(),ToDoList1.class);
         startActivity(it);

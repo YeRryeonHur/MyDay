@@ -71,7 +71,8 @@
         android:id="@+id/save_diary"
         android:layout_gravity="center"
         android:clickable="true"
-        android:onClick="save_Diary"/>
+        android:onClick="save_Diary"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
