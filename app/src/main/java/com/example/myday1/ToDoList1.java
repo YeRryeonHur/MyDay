@@ -21,6 +21,7 @@ import java.util.List;
 public class ToDoList1 extends AppCompatActivity {
 
     Button btn, start_btn;
+    Button b1,b2,b3,b4,b5,b6;
     TextView memotext, tv1;
     Button btn3, btn1, btn2, btn4;
     Intent it;
@@ -38,6 +39,15 @@ public class ToDoList1 extends AppCompatActivity {
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
+
+        b1=(Button)findViewById(R.id.studybtn);
+        b2=(Button)findViewById(R.id.exercisebtn);
+        b3=(Button)findViewById(R.id.breakbtn);
+        b4=(Button)findViewById(R.id.otherbtn);
+        b5=(Button)findViewById(R.id.foodbtn);
+        b6=(Button)findViewById(R.id.bookbtn);
+
+
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
         btn1.setBackgroundColor(color);
@@ -50,6 +60,16 @@ public class ToDoList1 extends AppCompatActivity {
         btn4.setAlpha(0.93f);
         start_btn.setBackgroundColor(color);
         start_btn.setAlpha(0.8f);
+
+        b1.setBackgroundColor(color);
+        b1.setAlpha(0.66f);
+        b2.setBackgroundColor(color);
+        b2.setAlpha(0.75f);
+        b3.setBackgroundColor(color); b3.setAlpha(0.75f);
+        b4.setBackgroundColor(color); b4.setAlpha(0.84f);
+        b5.setBackgroundColor(color); b5.setAlpha(0.84f);
+        b6.setBackgroundColor(color); b6.setAlpha(0.93f);
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

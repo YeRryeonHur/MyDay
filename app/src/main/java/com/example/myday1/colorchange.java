@@ -65,6 +65,7 @@ public class colorchange extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -73,6 +74,7 @@ public class colorchange extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                finish();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +82,7 @@ public class colorchange extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
+                finish();
             }
         });
 

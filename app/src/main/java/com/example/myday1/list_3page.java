@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,7 @@ public class list_3page extends Activity {
     private Context context;
     ListView listview;
     FrameLayout frame;
-    Button fab , btn4, btn2, btn1, btn3;
+    Button btn4, btn2, btn1, btn3;
     String date1="", date2="";
     int day=0, emotii=0, emojic=0, day_write=0, year_a, month_a, day_a, color=0;
     listAdapter adapter;
@@ -70,7 +72,6 @@ public class list_3page extends Activity {
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
-        fab= (Button)findViewById(R.id.fab);
         listview = findViewById(R.id.listv);
         listview.setAdapter(adapter);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -83,7 +84,6 @@ public class list_3page extends Activity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
-        fab.setBackgroundColor(color);
         keys = PreferenceManager.getArray(this, "key_list");
         for(int i = keys.size() - 1; i > -1; i--){
             day = Integer.parseInt(keys.get(i));
@@ -98,21 +98,31 @@ public class list_3page extends Activity {
             emotii = PreferenceManager.getInt(context, date1);
             list.add(new Data(day, emotii));
         }
+
+
 */
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        ImageView fab = (ImageView)findViewById(R.id.fab);
+        fab.setColorFilter(null);
+        fab.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), NewWriting.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
+
+
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
+                finish();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +130,7 @@ public class list_3page extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
+                finish();
             }
         });
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,6 +139,7 @@ public class list_3page extends Activity {
                 Intent intent = new Intent(getApplicationContext(), ReadDiary.class);
                 intent.putExtra("day_check", day_write);
                 startActivity(intent);
+                finish();
             }
         });
         int list = ((MainActivity)MainActivity.context).list;
@@ -137,11 +149,10 @@ public class list_3page extends Activity {
         tv1.setText(arr[list]);
 
         //일기버튼 추가 or 안보이게
-        Button go_writing = (Button)findViewById(R.id.fab);
         if(exist()){
-            go_writing.setVisibility(View.GONE);
+            fab.setVisibility(View.GONE);
         }
-        else go_writing.setVisibility(View.VISIBLE);
+        else fab.setVisibility(View.VISIBLE);
     }
     class listAdapter extends BaseAdapter{
         List<Data> lists;
@@ -218,8 +229,15 @@ public class list_3page extends Activity {
 
         for(int i = keys.size() - 1; i > -1; i--){
             if(keys.get(i).equals(today))
-            return true;
+                return true;
         }
         return false;
+    }
+
+    public void to_Writing(View v){
+        Log.i("sdf", "클릭됨");
+        Intent intent = new Intent(getApplicationContext(), NewWriting.class);
+        startActivity(intent);
+        finish();
     }
 }

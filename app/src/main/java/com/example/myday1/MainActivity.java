@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
+
+        ImageView iv_last =  (ImageView)findViewById(R.id.iv_lastmonth);
+        ImageView iv_next =  (ImageView)findViewById(R.id.iv_nextmonth);
+
+        iv_last.setColorFilter(null);
+        iv_last.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        iv_next.setColorFilter(null);
+        iv_next.setColorFilter(color, PorterDuff.Mode.SRC_IN);
         // 오늘 날짜를 세팅 해준다.
         long now = System.currentTimeMillis();
 
@@ -146,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 day = position - 5 - dayNum;
+                Intent intent = new Intent(getApplicationContext(), TimeTable.class);
+                startActivity(intent);
+
                 //Toast.makeText(getApplicationContext(), "test = " + day, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), "position: "  + position, Toast.LENGTH_SHORT).show();
 
