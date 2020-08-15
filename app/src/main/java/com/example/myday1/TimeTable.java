@@ -1,5 +1,6 @@
 package com.example.myday1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +9,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class TimeTable extends AppCompatActivity {
@@ -28,24 +38,81 @@ public class TimeTable extends AppCompatActivity {
     private ArrayList<String>finish_time2=new ArrayList<>();
     boolean flag;
     String[] TIME; //시작, 끝 시각
+    private String curDate=MainActivity.DATE;
+    private Intent it;
+
+    private ArrayList<ListViewItem> temp1=new ArrayList<>();
+    private ArrayList<String>temp2=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_table);
+        curDate=MainActivity.DATE;
+        it=getIntent();
+        String val=it.getStringExtra("chooseDate");
+        getData(val);
+    }
 
-        for(int i=0;i<ToDoList2.sendArr.size();i++){
-            ListViewItem listViewItem=ToDoList2.sendArr.get(i);
-            String Name=listViewItem.getName();
-            String Time=listViewItem.getTime();
-            TIME=Time.split(","); //문자열 분리
+    public void setData(String str){
+        SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = preferences.getString(str, null);
+
+        Type type = new TypeToken<ArrayList<ListViewItem>>() {
+        }.getType();
+        if (gson.fromJson(json, type) != null) {
+            temp1 = gson.fromJson(json, type);
+        }
+
+        preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
+        json = preferences.getString(str+"2", null);
+        if (json != null) {
+            try {
+                JSONArray a = new JSONArray(json);
+                for (int i = 0; i < a.length(); i++) {
+                    String url = a.optString(i);
+                    temp2.add(url);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getData(String str) {
+        Log.i("DATE: ",str);
+        if(str!=null) {
+            if (str.equals(curDate)) { //현재 날짜라면
+               // setData(str);
+              //  makeList(temp1,temp2);
+                makeList(ToDoList2.sendArr, ToDoList1.list);
+            } else { //키값 찾아서 배열에 넣어주기
+                setData(str);
+                makeList(temp1, temp2);
+            }
+
+            /**
+             * 색칠 메소드 호출
+             */
+            coloring();
+        }
+    }
+
+    public void makeList(ArrayList<ListViewItem> list1, ArrayList<String> list2){
+        for(int i=0;i<list1.size();i++) {
+
+            ListViewItem listViewItem = list1.get(i);
+            String Name = listViewItem.getName();
+            String Time = listViewItem.getTime();
+            TIME = Time.split(","); //문자열 분리
 
             Log.i("테스트", TIME[0] + ", " + TIME[1]);
 
-            for(int j=0;j<ToDoList1.list.size();j++){
-                flag=false;
-                String str=ToDoList1.list.get(j);
-                if(str.equals(Name)) {
+            for (int j = 0; j < list2.size(); j++) { //list2에 있다는 거는 완료 못한 일정
+                flag = false;
+                String str1 = list2.get(j);
+                if (str1.equals(Name)) {
                     flag = true;
                     schedule2.add(Name);
                     start_time2.add(TIME[0]);
@@ -54,7 +121,7 @@ public class TimeTable extends AppCompatActivity {
                 }
             }
 
-            if(flag==false) {
+            if (flag == false) {
                 schedule1.add(Name);
                 start_time1.add(TIME[0]);
                 finish_time1.add(TIME[1]);
@@ -62,7 +129,7 @@ public class TimeTable extends AppCompatActivity {
         }
     }
 
-    void coloring(int idx){
+    void coloring(){
         TextView set_color;
 
         int start_h, start_m, finish_h, finish_m;
@@ -85,7 +152,7 @@ public class TimeTable extends AppCompatActivity {
 
             for(int j = START; j <= FINISH; j++){
                 set_color = getTextView(j);
-                set_color.setBackgroundColor(Color.BLUE);
+                set_color.setBackgroundColor(Color.CYAN);
 
                 if(j == START){
                     set_color.setText(schedule1.get(i));
@@ -120,8 +187,16 @@ public class TimeTable extends AppCompatActivity {
     }
 
     /**
+     * 데이터 sharedpreferences에 최종 저장
+     */
+    private void saveAll(){
+
+    }
+
+    /**
      데이터 지우는 함수(혹시나 해서 만듦)
      **/
+
     private void deleteAll(){
         SharedPreferences sp=getSharedPreferences("sharedpreferences",0);
         SharedPreferences.Editor editor=sp.edit();

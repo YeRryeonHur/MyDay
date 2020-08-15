@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ToDoList2 extends AppCompatActivity {
+
+    private String curDate=MainActivity.DATE;
+
     public static ArrayList<ListViewItem> sendArr = new ArrayList<ListViewItem>();
     private ListView listView;
     private MyAdapter Adapter;
@@ -55,7 +58,7 @@ public class ToDoList2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.to_do_list2);
         saveData2();
-        loadData("listitem");
+        loadData();
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
@@ -83,6 +86,7 @@ public class ToDoList2 extends AppCompatActivity {
                 finish();
             }
         });
+
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,13 +103,7 @@ public class ToDoList2 extends AppCompatActivity {
                 finish();
             }
         });
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), colorchange.class);
-                startActivity(intent);
-            }
-        });
+
 
         output = findViewById(R.id.time_out);
         completebtn = findViewById(R.id.completebtn);
@@ -259,18 +257,18 @@ public class ToDoList2 extends AppCompatActivity {
 
 
     //데이터 호출
-    public void loadData(String str) {
+    public void loadData() {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = preferences.getString(str, null);
+        String json = preferences.getString("curDate", null);
 
-        if(str.equals("listitem")) {
-            Type type = new TypeToken<ArrayList<ListViewItem>>() {
-            }.getType();
-            if (gson.fromJson(json, type) != null) {
-                sendArr = gson.fromJson(json, type);
-            }
+
+        Type type = new TypeToken<ArrayList<ListViewItem>>() {
+        }.getType();
+        if (gson.fromJson(json, type) != null) {
+            sendArr = gson.fromJson(json, type);
         }
+
     }
 
 
@@ -279,7 +277,7 @@ public class ToDoList2 extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(ToDoList1.list);
-        editor.putString("listitem2", json);
+        editor.putString("curDate2", json);
         editor.apply();
     }
     @Override
@@ -374,7 +372,7 @@ public class ToDoList2 extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(sendArr);
-        editor.putString("listitem", json);
+        editor.putString("curDate", json);
         editor.apply();
     }
 }

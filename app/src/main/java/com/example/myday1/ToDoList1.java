@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ToDoList1 extends AppCompatActivity {
 
+    private String curDate=MainActivity.DATE;
+
     Button btn, start_btn;
     Button b1,b2,b3,b4,b5,b6;
     TextView memotext, tv1;
@@ -187,7 +189,7 @@ public class ToDoList1 extends AppCompatActivity {
 
     public void loadData()  {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
-        String json = preferences.getString("listitem2", null);
+        String json = preferences.getString("curDate2", null);
         if (json != null) {
             try {
                 JSONArray a = new JSONArray(json);

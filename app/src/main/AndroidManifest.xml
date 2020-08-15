@@ -25,6 +25,7 @@
         <activity android:name=".NewWriting"/>
         <activity android:name=".ReadDiary"/>
         <activity android:name=".list_3page"/>
+        <activity android:name=".TimeTable"/>
 
     </application>
 

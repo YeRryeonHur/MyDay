@@ -24,8 +24,8 @@ public class PreferenceManager {
     public static void setString(Context context, String key, String value){
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, value);
-        editor.commit();
+        editor.putString(key, value); //key, value를 이용하여 저장하는 형태
+        editor.commit(); //최종 커밋
     }
 
     public static void setInt(Context context, String key, int value) {

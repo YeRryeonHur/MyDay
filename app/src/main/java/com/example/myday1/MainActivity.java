@@ -29,6 +29,7 @@ import android.widget.Toast;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+    public static String DATE="";
     /**
      * 연/월 텍스트뷰
      */
@@ -101,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
         long now = System.currentTimeMillis();
 
         date = new Date(now);
+        /**
+         * 현재 년도, 월, 일 가져오기
+         */
+        SimpleDateFormat simpleDate=new SimpleDateFormat("yyyyMMdd");
+        DATE=simpleDate.format(date);
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +162,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 day = position - 5 - dayNum;
+
+
                 Intent intent = new Intent(getApplicationContext(), TimeTable.class);
+                /**
+                 * 선택한 날짜 넣어주기
+                 */
+
+               String[] strArr=tvDate.getText().toString().split("/");
+
+                String YEAR=strArr[0];
+                String MONTH=strArr[1];
+                String Day=String.valueOf(day);
+                if(day/10==0){
+                    Day="0"+day;
+                }
+                intent.putExtra("chooseDate",YEAR+MONTH+Day);
                 startActivity(intent);
 
                 //Toast.makeText(getApplicationContext(), "test = " + day, Toast.LENGTH_SHORT).show();
@@ -249,6 +270,9 @@ public class MainActivity extends AppCompatActivity {
             //오늘 day 가져옴
             today = mCal.get(Calendar.DAY_OF_MONTH);
             nowMonth = mCal.get(Calendar.MONTH);
+
+
+
             String sToday = String.valueOf(today);
             if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
                 holder.tvItemGridView.setTextColor(getResources().getColor(R.color.day));
