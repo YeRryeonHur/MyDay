@@ -143,7 +143,7 @@ public class TimeTable extends AppCompatActivity {
                 }
             }
 
-            if (flag == false) {
+            if (!flag) {
                 schedule1.add(Name);
                 start_time1.add(TIME[0]);
                 finish_time1.add(TIME[1]);
