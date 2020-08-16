@@ -135,7 +135,7 @@ public class TimeTable extends AppCompatActivity {
                 flag = false;
                 String str1 = list2.get(j);
                 if (str1.equals(Name)) {
-                     flag = true;
+                    flag = true;
                     schedule2.add(Name);
                     start_time2.add(TIME[0]);
                     finish_time2.add(TIME[1]);
