@@ -38,21 +38,23 @@
             android:id="@+id/listv"
             android:layout_width="match_parent"
             android:layout_height="470dp">
-
-
         </ListView>
 
 
-        <ImageView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_add_to_photos_black_24dp"
-            android:gravity="center"
-            android:clickable="true"
-            android:onClick="to_Writing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="10dp"/>
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:visibility="visible"
+            android:backgroundTint="#DFDDDD"
+            app:srcCompat="@drawable/ic_add_to_photos_black_24dp"
+            tools:ignore="VectorDrawableCompat"
+            android:focusable="true" />
+
+
     </FrameLayout>
 
     <LinearLayout

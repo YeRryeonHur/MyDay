@@ -63,6 +63,9 @@ public class ToDoList2 extends AppCompatActivity {
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
+        output = findViewById(R.id.time_out);
+        completebtn = findViewById(R.id.completebtn);
+        stopbtn = findViewById(R.id.stopbtn);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
         btn1.setBackgroundColor(color);
@@ -73,6 +76,10 @@ public class ToDoList2 extends AppCompatActivity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
+        completebtn.setBackgroundColor(color);
+        completebtn.setAlpha(0.75f);
+        stopbtn.setBackgroundColor(color);
+        stopbtn.setAlpha(0.84f);
         int list = ((MainActivity)MainActivity.context).list;
         Resources resources = getResources();
         String []arr = resources.getStringArray(R.array.goodsaying);
@@ -105,9 +112,7 @@ public class ToDoList2 extends AppCompatActivity {
         });
 
 
-        output = findViewById(R.id.time_out);
-        completebtn = findViewById(R.id.completebtn);
-        stopbtn = findViewById(R.id.stopbtn);
+
 
         Intent intent = getIntent();
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);

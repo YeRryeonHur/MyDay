@@ -1,5 +1,6 @@
 package com.example.myday1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -54,12 +55,14 @@ public class list_3page extends Activity {
     ListView listview;
     FrameLayout frame;
     Button btn4, btn2, btn1, btn3;
+    FloatingActionButton fab;
     String date1="", date2="";
     int day=0, emotii=0, emojic=0, day_write=0, year_a, month_a, day_a, color=0;
     listAdapter adapter;
     ArrayList<Data> list;
     ArrayList<String> keys;
     TextView tv1;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,7 @@ public class list_3page extends Activity {
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         listview = findViewById(R.id.listv);
         listview.setAdapter(adapter);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -102,10 +106,15 @@ public class list_3page extends Activity {
 
 */
 
-        ImageView fab = (ImageView)findViewById(R.id.fab);
-        fab.setColorFilter(null);
-        fab.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-
+     fab.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent = new Intent(getApplicationContext(), NewWriting.class);
+             startActivity(intent);
+         }
+     });//floating action button 사용
+        fab.setBackgroundColor(color);
+        fab.setRippleColor(color);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,11 +157,11 @@ public class list_3page extends Activity {
         tv1 = (TextView)findViewById(R.id.saying);
         tv1.setText(arr[list]);
 
-        //일기버튼 추가 or 안보이게
         if(exist()){
-            fab.setVisibility(View.GONE);
+            fab.setVisibility(View.INVISIBLE);
         }
         else fab.setVisibility(View.VISIBLE);
+        //일기버튼 추가 or 안보이게
     }
     class listAdapter extends BaseAdapter{
         List<Data> lists;
@@ -234,11 +243,6 @@ public class list_3page extends Activity {
         return false;
     }
 
-    public void to_Writing(View v){
-        Intent intent = new Intent(getApplicationContext(), NewWriting.class);
-        startActivity(intent);
-        finish();
-    }
 
     //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
     @Override

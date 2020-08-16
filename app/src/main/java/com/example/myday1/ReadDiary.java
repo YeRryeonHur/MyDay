@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class ReadDiary extends AppCompatActivity {
     int key_int, color=100;
     String KEY;
-    Button btn4, btn1, btn2;
+    Button btn4, btn1, btn2, mod, del;
     Context context = this;
     ArrayList<String> keys;
     Button btn3;
@@ -49,6 +49,8 @@ public class ReadDiary extends AppCompatActivity {
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
+        mod = (Button)findViewById(R.id.modify);
+        del = (Button)findViewById(R.id.delete);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
         btn1.setBackgroundColor(color);
@@ -59,6 +61,10 @@ public class ReadDiary extends AppCompatActivity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
+        mod.setBackgroundColor(color);
+        mod.setAlpha(0.6f);
+        del.setBackgroundColor(color);
+        del.setAlpha(0.8f);
         //KEY값 받아오기
         Intent it = getIntent();
         key_int = it.getIntExtra("day_check", 0);

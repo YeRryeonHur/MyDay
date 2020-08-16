@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        list = (showM*30+dayNum)%100;
+        list = (showM*30+dayNum)%100+1;
         context = this;
         Resources resources = getResources();
         String []arr = resources.getStringArray(R.array.goodsaying);

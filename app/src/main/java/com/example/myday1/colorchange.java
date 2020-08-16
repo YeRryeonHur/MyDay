@@ -115,7 +115,6 @@ public class colorchange extends AppCompatActivity {
                 .setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position, int color) {
-                        layout1.setBackgroundColor(color);
                         // OK 버튼 클릭 시 이벤트
 
                         btn1.setBackgroundColor(color);
