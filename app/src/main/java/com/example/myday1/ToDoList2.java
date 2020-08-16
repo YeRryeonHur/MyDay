@@ -260,7 +260,7 @@ public class ToDoList2 extends AppCompatActivity {
     public void loadData() {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = preferences.getString("curDate", null);
+        String json = preferences.getString(curDate, null);
 
 
         Type type = new TypeToken<ArrayList<ListViewItem>>() {
@@ -277,7 +277,7 @@ public class ToDoList2 extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(ToDoList1.list);
-        editor.putString("curDate2", json);
+        editor.putString(curDate+"2", json);
         editor.apply();
     }
     @Override
@@ -372,7 +372,7 @@ public class ToDoList2 extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(sendArr);
-        editor.putString("curDate", json);
+        editor.putString(curDate, json);
         editor.apply();
     }
 }

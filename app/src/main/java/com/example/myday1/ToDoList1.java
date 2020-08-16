@@ -189,7 +189,7 @@ public class ToDoList1 extends AppCompatActivity {
 
     public void loadData()  {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
-        String json = preferences.getString("curDate2", null);
+        String json = preferences.getString(curDate+"2", null);
         if (json != null) {
             try {
                 JSONArray a = new JSONArray(json);

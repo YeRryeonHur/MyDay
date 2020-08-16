@@ -84,9 +84,9 @@ public class TimeTable extends AppCompatActivity {
         Log.i("DATE: ",str);
         if(str!=null) {
             if (str.equals(curDate)) { //현재 날짜라면
-               // setData(str);
-              //  makeList(temp1,temp2);
-                makeList(ToDoList2.sendArr, ToDoList1.list);
+                setData(str);
+                makeList(temp1,temp2);
+              //  makeList(ToDoList2.sendArr, ToDoList1.list);
             } else { //키값 찾아서 배열에 넣어주기
                 setData(str);
                 makeList(temp1, temp2);
