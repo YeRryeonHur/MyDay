@@ -187,13 +187,6 @@ public class TimeTable extends AppCompatActivity {
     }
 
     /**
-     * 데이터 sharedpreferences에 최종 저장
-     */
-    private void saveAll(){
-
-    }
-
-    /**
      데이터 지우는 함수(혹시나 해서 만듦)
      **/
 
