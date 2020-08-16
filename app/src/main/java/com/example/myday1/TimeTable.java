@@ -176,7 +176,7 @@ public class TimeTable extends AppCompatActivity {
 
             for(int j = START; j <= FINISH; j++){
                  set_color = getTextView(j);
-                 set_color.setBackgroundColor(color);
+                  set_color.setBackgroundColor(color);
 
                 if(j == START){
                     set_color.setText(schedule1.get(i));
