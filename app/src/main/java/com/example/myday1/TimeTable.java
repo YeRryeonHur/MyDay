@@ -179,7 +179,7 @@ public class TimeTable extends AppCompatActivity {
                   set_color.setBackgroundColor(color);
 
                 if(j == START){
-                    set_color.setText(schedule1.get(i));
+                     set_color.setText(schedule1.get(i));
                 }
             }
         }
