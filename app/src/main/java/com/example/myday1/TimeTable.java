@@ -153,6 +153,8 @@ public class TimeTable extends AppCompatActivity {
 
     void coloring(){
         TextView set_color;
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        int color = pref.getInt("key2", 0);
 
         int start_h, start_m, finish_h, finish_m;
 
@@ -174,7 +176,7 @@ public class TimeTable extends AppCompatActivity {
 
             for(int j = START; j <= FINISH; j++){
                 set_color = getTextView(j);
-                set_color.setBackgroundColor(Color.CYAN);
+                set_color.setBackgroundColor(color);
 
                 if(j == START){
                     set_color.setText(schedule1.get(i));
@@ -199,7 +201,8 @@ public class TimeTable extends AppCompatActivity {
 
             for(int j = START; j <= FINISH; j++){
                 set_color = getTextView(j);
-                set_color.setBackgroundColor(Color.GRAY);
+                set_color.setBackgroundColor(color);
+                set_color.setAlpha((float)0.5);
 
                 if(j == START){
                     set_color.setText(schedule2.get(i));
