@@ -65,6 +65,7 @@ public class colorchange extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -74,6 +75,7 @@ public class colorchange extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -82,6 +84,7 @@ public class colorchange extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -148,6 +151,7 @@ public class colorchange extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
 
     }

@@ -90,6 +90,7 @@ public class ToDoList2 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -99,6 +100,7 @@ public class ToDoList2 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -107,6 +109,7 @@ public class ToDoList2 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -185,7 +188,8 @@ public class ToDoList2 extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //intent(pos);
                                     doingnow=(String)Adapter.getItem(pos);
-                                    finalConvertView.setBackgroundColor(Color.CYAN);
+                                    finalConvertView.setBackgroundColor(color);
+                                    finalConvertView.setAlpha(0.75f);
                                     myBaseTime = SystemClock.elapsedRealtime();
                                     myTimer.sendEmptyMessage(0);
                                     long now=System.currentTimeMillis();
@@ -387,6 +391,7 @@ public class ToDoList2 extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
 
     }

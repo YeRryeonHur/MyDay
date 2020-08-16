@@ -75,6 +75,7 @@ public class ReadDiary extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -83,6 +84,7 @@ public class ReadDiary extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -91,6 +93,7 @@ public class ReadDiary extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -99,6 +102,7 @@ public class ReadDiary extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -282,6 +286,7 @@ public class ReadDiary extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), NewWriting.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
 
     }

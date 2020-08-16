@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -74,7 +75,47 @@ public class TimeTable extends AppCompatActivity {
         btn3.setAlpha(0.84f);
         btn4.setBackgroundColor(color);
         btn4.setAlpha(0.93f);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), colorchange.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+
     }
+
+
 
     public void setData(String str){
         SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
@@ -431,5 +472,17 @@ public class TimeTable extends AppCompatActivity {
         }
 
         return tv;
+    }
+
+
+    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0,0);
+        finish();
+
     }
 }

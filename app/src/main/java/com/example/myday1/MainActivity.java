@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
 
                 startActivity(intent);
+                overridePendingTransition(0,0);
             }
         });
         //연,월,일을 따로 저장
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 intent.putExtra("chooseDate",YEAR+MONTH+Day);
                 startActivity(intent);
+                overridePendingTransition(0,0);
 
                 //Toast.makeText(getApplicationContext(), "test = " + day, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), "position: "  + position, Toast.LENGTH_SHORT).show();
@@ -250,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
 
+
             ViewHolder holder = null;
 
             if (convertView == null) {
@@ -273,16 +276,15 @@ public class MainActivity extends AppCompatActivity {
 
 
             String sToday = String.valueOf(today);
-            if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
-                holder.tvItemGridView.setTextColor(getResources().getColor(R.color.day));
-            }
             if (position%7==0){
                 holder.tvItemGridView.setTextColor(getResources().getColor(R.color.sunday));
             }
             if (position%7==6){
                 holder.tvItemGridView.setTextColor(getResources().getColor(R.color.saturday));
             }
-
+            if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
+                holder.tvItemGridView.setTextColor(getResources().getColor(R.color.day));
+            }
             return convertView;
         }
 
@@ -394,11 +396,13 @@ public class MainActivity extends AppCompatActivity {
     public void schedule(View v){
         Intent it=new Intent(getApplicationContext(),ToDoList1.class);
         startActivity(it);
+        overridePendingTransition(0,0);
         finish();
     }
     public void setting(View v){
         Intent intent = new Intent(getApplicationContext(), colorchange.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
     }
 

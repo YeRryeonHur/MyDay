@@ -111,6 +111,7 @@ public class list_3page extends Activity {
          public void onClick(View v) {
              Intent intent = new Intent(getApplicationContext(), NewWriting.class);
              startActivity(intent);
+             overridePendingTransition(0,0);
          }
      });//floating action button 사용
         fab.setBackgroundColor(color);
@@ -120,6 +121,7 @@ public class list_3page extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -131,6 +133,7 @@ public class list_3page extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -139,6 +142,7 @@ public class list_3page extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -148,6 +152,7 @@ public class list_3page extends Activity {
                 Intent intent = new Intent(getApplicationContext(), ReadDiary.class);
                 intent.putExtra("day_check", day_write);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -250,6 +255,7 @@ public class list_3page extends Activity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
 
     }

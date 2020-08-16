@@ -77,6 +77,7 @@ public class ToDoList1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -85,6 +86,7 @@ public class ToDoList1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -93,6 +95,7 @@ public class ToDoList1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         });
@@ -180,9 +183,11 @@ public class ToDoList1 extends AppCompatActivity {
 
                 }
 
-                it = new Intent(this, ToDoList2.class);
+                it = new Intent(this, ToDoList2.class);                it = new Intent(this, ToDoList2.class);
+
                 it.putStringArrayListExtra("list", list);
                 startActivity(it);
+                overridePendingTransition(0,0);
         }
     }
 
@@ -210,6 +215,7 @@ public class ToDoList1 extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
 
     }

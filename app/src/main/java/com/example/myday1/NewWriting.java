@@ -95,6 +95,7 @@ public class NewWriting extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
             }
         });
 
@@ -153,6 +154,7 @@ public class NewWriting extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), list_3page.class);
         intent.putExtra("da_te", data_date);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
     }
 
@@ -302,6 +304,7 @@ public class NewWriting extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
 
     }
