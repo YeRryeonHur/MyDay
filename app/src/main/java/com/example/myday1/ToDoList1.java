@@ -203,4 +203,15 @@ public class ToDoList1 extends AppCompatActivity {
             }
         }
     }
+
+    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 }

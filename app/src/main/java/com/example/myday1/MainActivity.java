@@ -163,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 day = position - 5 - dayNum;
 
-
                 Intent intent = new Intent(getApplicationContext(), TimeTable.class);
                 /**
                  * 선택한 날짜 넣어주기

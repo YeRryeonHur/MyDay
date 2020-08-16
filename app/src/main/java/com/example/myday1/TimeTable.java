@@ -1,10 +1,12 @@
 package com.example.myday1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +46,11 @@ public class TimeTable extends AppCompatActivity {
     private ArrayList<ListViewItem> temp1=new ArrayList<>();
     private ArrayList<String>temp2=new ArrayList<>();
 
+    //버튼 색 변경
+    int color = 0;
+    Button btn3, btn1, btn2, btn4;
+    public static Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +59,21 @@ public class TimeTable extends AppCompatActivity {
         it=getIntent();
         String val=it.getStringExtra("chooseDate");
         getData(val);
+        //버튼 색 변경
+        btn1 = (Button)findViewById(R.id.btn1);
+        btn2 = (Button)findViewById(R.id.btn2);
+        btn3 = (Button)findViewById(R.id.btn3);
+        btn4 = (Button)findViewById(R.id.btn4);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", 0);
+        btn1.setBackgroundColor(color);
+        btn1.setAlpha(0.66f);
+        btn2.setBackgroundColor(color);
+        btn2.setAlpha(0.75f);
+        btn3.setBackgroundColor(color);
+        btn3.setAlpha(0.84f);
+        btn4.setBackgroundColor(color);
+        btn4.setAlpha(0.93f);
     }
 
     public void setData(String str){

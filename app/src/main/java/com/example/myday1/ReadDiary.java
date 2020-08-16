@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -38,8 +39,8 @@ public class ReadDiary extends AppCompatActivity {
     ArrayList<String> keys;
     Button btn3;
     //날씨
-    TextView tv_weather;
-    ImageView Iv_weather;
+    TextView tv_degree;
+    ImageView iv_weather;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +125,41 @@ public class ReadDiary extends AppCompatActivity {
         else if(emoji_code == 4){
             iv.setImageResource(R.drawable.angry);
         }
+     //날씨 불러오기
+        //온도 불러오기
+        String DeKEY = KEY + "De";
+        String Degree = PreferenceManager.getString(this,DeKEY);
 
+        tv_degree = (TextView)findViewById(R.id.today_weather);
+        tv_degree.setText(Degree+" ℃");
+
+        //이모티콘 불러오기
+        iv_weather = (ImageView)findViewById(R.id.weather_reading);
+
+        String WKEY = KEY + "W";
+        int Weather_code = PreferenceManager.getInt(this,WKEY);
+
+        if(Weather_code==1){
+            iv_weather.setImageResource(R.drawable.sun);
+        }
+        else if(Weather_code==2){
+            iv_weather.setImageResource(R.drawable.cloudy);
+        }
+        else if(Weather_code==3){
+            iv_weather.setImageResource(R.drawable.cloud);
+        }
+        else if(Weather_code==4){
+            iv_weather.setImageResource(R.drawable.rain);
+        }
+        else if(Weather_code==5){
+            iv_weather.setImageResource(R.drawable.snow);
+        }
+        else if(Weather_code==6){
+            iv_weather.setImageResource(R.drawable.rain_snow);
+        }
+        else if(Weather_code==7){
+            iv_weather.setImageResource(R.drawable.rain);
+        }
 
         final Button bt1 = (Button)findViewById(R.id.modify);
         bt1.setOnClickListener(new View.OnClickListener(){
@@ -163,7 +198,7 @@ public class ReadDiary extends AppCompatActivity {
             }
         });
 
-        final String ecode = EKEY, dcode = DKEY;
+        final String ecode = EKEY, dcode = DKEY, decode = DeKEY, wcode = WKEY;
         final Button bt3 = (Button)findViewById(R.id.delete);
         bt3.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -177,6 +212,8 @@ public class ReadDiary extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         PreferenceManager.removeKey(context, dcode);
                         PreferenceManager.removeKey(context, ecode);
+                        PreferenceManager.removeKey(context, decode);
+                        PreferenceManager.removeKey(context, wcode);
 
                         //키값 삭제
                         keys = PreferenceManager.getArray(context, "key_list");
@@ -199,14 +236,6 @@ public class ReadDiary extends AppCompatActivity {
                 ad.show();
             }
         });
-        //날씨 설정
-        tv_weather = (TextView)findViewById(R.id.today_weather);
-        Iv_weather = (ImageView)findViewById(R.id.weather);
-
-        String api = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2714051000";
-
-        DownloadWebpageTask task = new DownloadWebpageTask();
-        task.execute(api);
 
 
     }
@@ -241,119 +270,15 @@ public class ReadDiary extends AppCompatActivity {
         return -1;
     }
 
+    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), NewWriting.class);
+        startActivity(intent);
+        finish();
 
-    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
-        // ctrl + o
-
-        @Override
-        protected void onPostExecute(String result) {
-            try{
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(true);
-                XmlPullParser xpp = factory.newPullParser();
-
-                xpp.setInput(new StringReader(result));
-
-                // 현재 이벤트 확인
-                int eventType = xpp.getEventType();
-
-                String start_tag = "";
-                String txt = "";
-                String end_tag = "";
-
-                boolean bSet_itemCode = false;
-                boolean bSet_itemCode1 = false;//이모티콘 사용
-
-                while (eventType != XmlPullParser.END_DOCUMENT){
-                    if(eventType == XmlPullParser.START_DOCUMENT){
-
-                    }else if(eventType == XmlPullParser.START_TAG){
-                        start_tag = xpp.getName();
-                        if (start_tag.equals("temp")){
-                            bSet_itemCode = true;
-                        }
-                        if (start_tag.equals("wfKor")){
-                            bSet_itemCode1 = true;
-                        }
-
-                    }else if(eventType == XmlPullParser.TEXT){
-                        // 엘리먼트 내용 확인
-                        if (bSet_itemCode){
-                            txt = xpp.getText();
-                            tv_weather.setText(txt+" ℃");
-                            bSet_itemCode = false;
-                        }
-                        if (bSet_itemCode1){
-                            txt = xpp.getText();
-                            if(txt.equals("맑음")){
-                                Iv_weather.setImageResource(R.drawable.sun);
-                            }
-                            else if(txt.equals("구름 많음")){
-                                Iv_weather.setImageResource(R.drawable.cloudy);
-                            }
-                            else if(txt.equals("흐림")){
-                                Iv_weather.setImageResource(R.drawable.cloud);
-                            }
-                            else if(txt.equals("비")){
-                                Iv_weather.setImageResource(R.drawable.rain);
-                            }
-                            else if(txt.equals("눈")){
-                                Iv_weather.setImageResource(R.drawable.snow);
-                            }
-                            else if(txt.equals("비/눈")){
-                                Iv_weather.setImageResource(R.drawable.rain_snow);
-                            }
-                            else if(txt.equals("소나기")){
-                                Iv_weather.setImageResource(R.drawable.rain);
-                            }
-                            bSet_itemCode1 = false;
-                        }
-
-                    }else if(eventType == XmlPullParser.END_TAG){
-                        end_tag = xpp.getName();
-                    }
-                    eventType = xpp.next();
-                }
-
-
-            }catch(Exception e){
-
-            }
-        }
-
-        @Override
-        protected String doInBackground(String... urls) {
-            try{
-                String txt = (String)downloadUrl((String) urls[0]);
-                return txt;
-            }catch (IOException e){
-                Log.e("결과", e.toString());
-                return "다운로드 실패";
-            }
-
-        }
-
-        private  String downloadUrl(String api) throws IOException{
-            HttpURLConnection conn = null;
-            try{
-                URL url = new URL(api);
-                conn = (HttpURLConnection) url.openConnection();
-                BufferedInputStream buf = new BufferedInputStream(conn.getInputStream());
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(buf,"utf-8"));
-                String line = null;
-                String page ="";
-
-                while ((line = bufferedReader.readLine()) != null){
-                    page += line;
-                }
-                return page;
-            }finally {
-                conn.disconnect();
-            }
-        }
     }
-
-
 
 
 }

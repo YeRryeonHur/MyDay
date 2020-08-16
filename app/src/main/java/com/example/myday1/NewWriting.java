@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,6 +20,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +43,11 @@ public class NewWriting extends AppCompatActivity {
     ArrayList<String> keys;
     Button btn3, btn1, btn2, btn4, save_diary;
     int color=0;
+
+    //날씨
+    TextView tv_weather;
+    ImageView Iv_weather;
+    String degree;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +97,16 @@ public class NewWriting extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        //날씨 설정
+        tv_weather = (TextView)findViewById(R.id.today_weather);
+        Iv_weather = (ImageView)findViewById(R.id.weather);
+
+        String api = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2714051000";
+
+        DownloadWebpageTask task = new DownloadWebpageTask();
+        task.execute(api);
     }
 
     public void save_Diary(View v){
@@ -136,5 +164,147 @@ public class NewWriting extends AppCompatActivity {
         keys.add(k);
         PreferenceManager.setArray(this, "key_list", keys);
     }
+
+
+
+    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+        // ctrl + o
+
+        @Override
+        protected void onPostExecute(String result) {
+            int flag1=0, flag2=0;
+            try{
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                XmlPullParser xpp = factory.newPullParser();
+
+                xpp.setInput(new StringReader(result));
+
+                // 현재 이벤트 확인
+                int eventType = xpp.getEventType();
+
+                String start_tag = "";
+                String txt = "";
+                String end_tag = "";
+                int weather_code=1;
+                boolean bSet_itemCode = false;
+                boolean bSet_itemCode1 = false;//이모티콘 사용
+                while ((eventType != XmlPullParser.END_DOCUMENT)&&((flag1==0)||(flag2==0))){
+
+                    if(eventType == XmlPullParser.START_DOCUMENT){
+
+                    }else if(eventType == XmlPullParser.START_TAG){
+                        start_tag = xpp.getName();
+                        if (start_tag.equals("temp")){
+                            bSet_itemCode = true;
+                        }
+                        if (start_tag.equals("wfKor")){
+                            bSet_itemCode1 = true;
+                        }
+
+                    }else if(eventType == XmlPullParser.TEXT){
+                        // 엘리먼트 내용 확인
+                        if (bSet_itemCode){
+                            txt = xpp.getText();
+                            tv_weather.setText(txt+" ℃");
+                            Log.i("온도",txt);
+                            degree = txt;
+                            flag1=1;
+                            String DeKEY = KEY_date + "De";
+                            PreferenceManager.setString(getApplicationContext(), DeKEY, degree);
+                            bSet_itemCode = false;
+                        }
+                        if (bSet_itemCode1){
+                            txt = xpp.getText();
+                            flag2=1;
+                            String WKEY = KEY_date + "W";
+                            if(txt.equals("맑음")){
+                                Iv_weather.setImageResource(R.drawable.sun);
+                                weather_code = 1;
+                            }
+                            else if(txt.equals("구름 많음")){
+                                Iv_weather.setImageResource(R.drawable.cloudy);
+                                weather_code = 2;
+                            }
+                            else if(txt.equals("흐림")){
+                                Iv_weather.setImageResource(R.drawable.cloud);
+                                weather_code = 3;
+                            }
+                            else if(txt.equals("비")){
+                                Iv_weather.setImageResource(R.drawable.rain);
+                                weather_code = 4;
+                            }
+                            else if(txt.equals("눈")){
+                                Iv_weather.setImageResource(R.drawable.snow);
+                                weather_code = 5;
+                            }
+                            else if(txt.equals("비/눈")){
+                                Iv_weather.setImageResource(R.drawable.rain_snow);
+                                weather_code = 6;
+                            }
+                            else if(txt.equals("소나기")){
+                                Iv_weather.setImageResource(R.drawable.rain);
+                                weather_code = 7;
+                            }
+                            PreferenceManager.setInt(getApplicationContext(), WKEY, weather_code);
+                            bSet_itemCode1 = false;
+                        }
+
+                    }else if(eventType == XmlPullParser.END_TAG){
+                        end_tag = xpp.getName();
+                    }
+                    eventType = xpp.next();
+                }
+
+
+            }catch(Exception e){
+
+            }
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            try{
+                String txt = (String)downloadUrl((String) urls[0]);
+                return txt;
+            }catch (IOException e){
+                Log.e("결과", e.toString());
+                return "다운로드 실패";
+            }
+
+        }
+
+        private  String downloadUrl(String api) throws IOException{
+            HttpURLConnection conn = null;
+            try{
+                URL url = new URL(api);
+                conn = (HttpURLConnection) url.openConnection();
+                BufferedInputStream buf = new BufferedInputStream(conn.getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(buf,"utf-8"));
+                String line = null;
+                String page ="";
+
+                while ((line = bufferedReader.readLine()) != null){
+                    page += line;
+                }
+                return page;
+            }finally {
+                conn.disconnect();
+            }
+        }
+    }
+
+//뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 }
 

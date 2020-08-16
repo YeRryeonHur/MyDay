@@ -42,7 +42,6 @@ public class PreferenceManager {
         editor.commit();
     }
 
-
     public static void setArray(Context context, String key, ArrayList<String> values) {
         SharedPreferences prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
