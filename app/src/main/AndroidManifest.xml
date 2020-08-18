@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ToDoList1"/>
         <activity android:name=".ToDoList2"/>
+        <activity android:name=".other"/>
         <activity android:name=".colorchange"/>
         <activity android:name=".NewWriting"/>
         <activity android:name=".ReadDiary"/>

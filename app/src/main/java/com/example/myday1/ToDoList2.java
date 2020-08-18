@@ -1,15 +1,21 @@
 package com.example.myday1;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +26,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -53,6 +61,9 @@ public class ToDoList2 extends AppCompatActivity {
     int myCount = 1;
     long myBaseTime;
     long myPauseTime;
+
+    public NotificationManager manager;
+    public NotificationCompat.Builder builder;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,6 +208,7 @@ public class ToDoList2 extends AppCompatActivity {
                                     SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm:ss");
                                     start_time=simpleDate.format(mDate);
                                     cur_Status=Run;
+                                    showNoti();
                                 }
                             })
                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -304,9 +316,7 @@ public class ToDoList2 extends AppCompatActivity {
                     case Init:
                         flag = true;
                         myBaseTime = SystemClock.elapsedRealtime();
-                       // System.out.println(myBaseTime);
                         myTimer.sendEmptyMessage(0);
-
                         stopbtn.setText("일시정지");
                         cur_Status = Run;
                         break;
@@ -383,6 +393,34 @@ public class ToDoList2 extends AppCompatActivity {
         String json = gson.toJson(sendArr);
         editor.putString(curDate, json);
         editor.apply();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
+    private boolean isScreenOn(){
+        PowerManager pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
+        return pm.isInteractive();
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
+    public void showNoti() {
+        builder=null;
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        @SuppressLint("WrongConstant") PendingIntent pintent=PendingIntent.getActivity(getApplicationContext(),0,intent,Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+        manager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            manager.createNotificationChannel(
+                    new NotificationChannel("channel1","Channel1",NotificationManager.IMPORTANCE_DEFAULT)
+            );
+
+        }
+        builder = new NotificationCompat.Builder(ToDoList2.this,"channel1")
+                .setContentTitle("일정")
+                .setSmallIcon(R.drawable.ic_done_black_24dp)
+                .setContentText(doingnow)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+               // .setAutoCancel(true)
+                .setShowWhen(true);
+        if(!isScreenOn()) builder.setContentIntent(pintent);
+        manager.notify(1,builder.build());
     }
 
     //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드

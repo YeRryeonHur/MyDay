@@ -168,8 +168,8 @@ public class ToDoList1 extends AppCompatActivity {
                 break;
 
             case R.id.otherbtn: //other class에서 값 전달받아야함.
-                // it = new Intent(this, other.class);
-                //startActivityForResult(it, CODE);
+                 it = new Intent(this, other.class);
+                startActivityForResult(it, CODE);
                 break;
 
             case R.id.startbtn:
@@ -182,8 +182,7 @@ public class ToDoList1 extends AppCompatActivity {
                     }
 
                 }
-
-                it = new Intent(this, ToDoList2.class);                it = new Intent(this, ToDoList2.class);
+                it = new Intent(this, ToDoList2.class);
 
                 it.putStringArrayListExtra("list", list);
                 startActivity(it);
@@ -191,6 +190,25 @@ public class ToDoList1 extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    String edtAddr = data.getStringExtra("TEXT");
+                    String[] str=edtAddr.split("\n");
+                    for(int i=0;i<str.length;i++)
+                    {
+                        if(str[i].equals("")) continue;
+                        memotext.append(str[i]+"\n");
+                    }
+                } else {
+
+                }
+                break;
+        }
+    }
 
     public void loadData()  {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
