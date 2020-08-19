@@ -132,6 +132,7 @@ public class colorchange extends AppCompatActivity {
                     @Override
                     public void onChooseColor(int position, int color) {
                         // OK 버튼 클릭 시 이벤트
+                        if(color == 0) return;
 
                         Drawable iv_btn=btn1.getBackground();
                         ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
