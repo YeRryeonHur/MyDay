@@ -127,7 +127,7 @@ public class list_3page extends Activity {
              overridePendingTransition(0,0);
          }
      });//floating action button 사용
-        fab.setBackgroundColor(color);
+         fab.setBackgroundColor(color);
         fab.setRippleColor(color);
         fab.setBackgroundTintList(ColorStateList.valueOf(color));
         btn1.setOnClickListener(new View.OnClickListener() {
