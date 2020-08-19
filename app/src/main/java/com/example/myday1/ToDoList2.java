@@ -68,6 +68,7 @@ public class ToDoList2 extends AppCompatActivity {
 
     public NotificationManager manager;
     public NotificationCompat.Builder builder;
+    SharedPreferences pref;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class ToDoList2 extends AppCompatActivity {
         completebtn = findViewById(R.id.completebtn);
         stopbtn = findViewById(R.id.stopbtn);
 
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+      pref=getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
 
         Drawable iv_btn=btn1.getBackground();
@@ -149,8 +150,6 @@ public class ToDoList2 extends AppCompatActivity {
         });
 
 
-
-
         Intent intent = getIntent();
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);
 
@@ -205,11 +204,16 @@ public class ToDoList2 extends AppCompatActivity {
             txt.setText(string.get(position));
             txt.setSelected(true);
 
-            Button btn = (Button) convertView.findViewById(R.id.btn1);
-            btn.setOnClickListener(this);
+            Button first = (Button) convertView.findViewById(R.id.first);
+            first.setOnClickListener(this);
+
+            Drawable iv_btn=first.getBackground();
+            ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+            iv_btn.setColorFilter(filter);
+
 
             final View finalConvertView = convertView;
-            btn.setOnClickListener(new Button.OnClickListener() {
+            first.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     alert = new AlertDialog.Builder(context);
@@ -218,6 +222,7 @@ public class ToDoList2 extends AppCompatActivity {
                             .setMessage("시작할까?")
                             .setCancelable(false)
                             .setPositiveButton("시작", new DialogInterface.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //intent(pos);
@@ -246,10 +251,14 @@ public class ToDoList2 extends AppCompatActivity {
 
             });
 
-            Button btn2;
-            btn2 = convertView.findViewById(R.id.btn2);
-            btn2.setOnClickListener(this);
-            btn2.setOnClickListener(new Button.OnClickListener() {
+            Button last;
+            last = convertView.findViewById(R.id.last);
+            iv_btn=last.getBackground();
+            filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+            iv_btn.setColorFilter(filter);
+
+            last.setOnClickListener(this);
+            last.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final int count;
