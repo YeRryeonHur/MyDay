@@ -1,5 +1,6 @@
 package com.example.myday1;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -10,9 +11,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -102,7 +108,29 @@ public class colorchange extends AppCompatActivity {
             }
         });
 
-
+        Switch opt_change = findViewById(R.id.change_option);
+        final TextView alert = findViewById(R.id.alert_info);
+        boolean on_off = PreferenceManager.getBoolean(this, "alert");
+        if(on_off == true){
+            opt_change.setChecked(true);
+            alert.setText(" 오늘 일정에 대한 알림을 받습니다.");
+        }
+        else{
+            opt_change.setChecked(false);
+            alert.setText(" 오늘 일정에 대한 알림을 받지 않습니다.");
+        }
+        opt_change.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked==true){
+                    PreferenceManager.setBoolean(colorchange.this, "alert", true);
+                    alert.setText(" 오늘 일정에 대한 알림을 받습니다.     ");
+                }else{
+                    PreferenceManager.setBoolean(colorchange.this, "alert", false);
+                    alert.setText(" 오늘 일정에 대한 알림을 받지 않습니다.");
+                }
+            }
+        });
     }
 
     public void openColorPicker() {
@@ -163,8 +191,6 @@ public class colorchange extends AppCompatActivity {
                         // Cancel 버튼 클릭 시 이벤트
                     }
                 }).show();  // dialog 생성
-
-
     }
 
     //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
@@ -177,9 +203,4 @@ public class colorchange extends AppCompatActivity {
         finish();
 
     }
-
-
-
-
-
 }

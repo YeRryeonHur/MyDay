@@ -236,7 +236,9 @@ public class ToDoList2 extends AppCompatActivity {
                                     SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm:ss");
                                     start_time=simpleDate.format(mDate);
                                     cur_Status=Run;
-                                    showNoti();
+
+                                    boolean noti = PreferenceManager.getBoolean(ToDoList2.this, "alert");
+                                    if(noti) showNoti();
                                 }
                             })
                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {

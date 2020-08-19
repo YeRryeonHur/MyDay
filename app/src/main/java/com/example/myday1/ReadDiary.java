@@ -193,7 +193,7 @@ public class ReadDiary extends AppCompatActivity {
                 ad.setTitle("Modify");
                 ad.setMessage("수정할까요?");
 
-                ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         EditText et = (EditText)findViewById(R.id.Diary_ET);
@@ -212,7 +212,7 @@ public class ReadDiary extends AppCompatActivity {
                         et.setVisibility(View.VISIBLE);
                     }
                 });
-                ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                ad.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -231,7 +231,7 @@ public class ReadDiary extends AppCompatActivity {
                 ad.setTitle("Delete");
                 ad.setMessage("삭제할까요?");
 
-                ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         PreferenceManager.removeKey(context, dcode);
@@ -251,7 +251,7 @@ public class ReadDiary extends AppCompatActivity {
                         finish();
                     }
                 });
-                ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                ad.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

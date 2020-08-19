@@ -42,6 +42,13 @@ public class PreferenceManager {
         editor.commit();
     }
 
+    public static void setBoolean(Context context, String key, boolean value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
     public static void setArray(Context context, String key, ArrayList<String> values) {
         SharedPreferences prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
@@ -73,6 +80,12 @@ public class PreferenceManager {
     public static float getFloat(Context context, String key) {
         SharedPreferences prefs = getPreferences(context);
         float value = prefs.getFloat(key, DEFAULT_VALUE_FLOAT);
+        return value;
+    }
+
+    public static boolean getBoolean(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        boolean value = prefs.getBoolean(key, DEFAULT_VALUE_BOOLEAN);
         return value;
     }
 
