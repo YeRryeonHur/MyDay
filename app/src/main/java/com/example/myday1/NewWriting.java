@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -63,14 +67,23 @@ public class NewWriting extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        //btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn4.setAlpha(0.93f);
+
         save_diary.setBackgroundColor(color);
 
         SimpleDateFormat YEAR = new SimpleDateFormat("yy", Locale.getDefault());
@@ -103,7 +116,6 @@ public class NewWriting extends AppCompatActivity {
         //날씨 설정
         tv_weather = (TextView)findViewById(R.id.today_weather);
         Iv_weather = (ImageView)findViewById(R.id.weather);
-
         String api = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2714051000";
 
         DownloadWebpageTask task = new DownloadWebpageTask();

@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="00 : 00 : 00"
+            android:background="@drawable/text_border"
             android:gravity="center"
             android:textSize="60sp"
             android:textColor="#000000"/>
@@ -59,20 +60,22 @@
             android:orientation="horizontal">
             <Button
                 android:id="@+id/completebtn"
-                android:layout_width="0dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="재설정"
-                android:textSize="30sp"
+                android:background="@drawable/ic_brightness_1_black_24dp"
+                android:text="완료"
+                android:textSize="20sp"
                 android:onClick="myonclick"
                 />
             <Button
                 android:id="@+id/stopbtn"
-                android:layout_width="0dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/ic_brightness_1_black_24dp"
                 android:text="일시정지"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:onClick="myonclick"/>
         </LinearLayout>
 
@@ -92,6 +95,7 @@
 
             android:text="home"
             android:textColor="#000000"
+            android:background="@drawable/button_design"
             />
         <Button
             android:id="@+id/btn2"
@@ -100,21 +104,24 @@
             android:clickable="true"
 
             android:text="schedule"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"/>
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:text="Diary"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"/>
         <Button
             android:id="@+id/btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:text="setting"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"/>
 
     </LinearLayout>
 

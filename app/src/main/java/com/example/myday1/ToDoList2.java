@@ -11,6 +11,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -77,20 +81,39 @@ public class ToDoList2 extends AppCompatActivity {
         output = findViewById(R.id.time_out);
         completebtn = findViewById(R.id.completebtn);
         stopbtn = findViewById(R.id.stopbtn);
+
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 0);
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
-        completebtn.setBackgroundColor(color);
+        color = pref.getInt("key2", 100);
+
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        //btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        iv_btn.setColorFilter(filter);
+       // btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn4.setAlpha(0.93f);
+
+        iv_btn=completebtn.getBackground();
+        iv_btn.setColorFilter(filter);
+
+        iv_btn=stopbtn.getBackground();
+        iv_btn.setColorFilter(filter);
+
         completebtn.setAlpha(0.75f);
-        stopbtn.setBackgroundColor(color);
-        stopbtn.setAlpha(0.84f);
+        stopbtn.setAlpha(0.75f);
+
+        completebtn.setTextColor(Color.BLACK);
+        stopbtn.setTextColor(Color.BLACK);
+
         int list = ((MainActivity)MainActivity.context).list;
         Resources resources = getResources();
         String []arr = resources.getStringArray(R.array.goodsaying);

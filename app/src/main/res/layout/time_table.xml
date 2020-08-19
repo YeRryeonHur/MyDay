@@ -523,13 +523,17 @@
 
     <LinearLayout android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1" android:gravity="top" android:layout_gravity="center">
 
-    <Button android:id="@+id/btn1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="home"/>
+    <Button android:id="@+id/btn1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="home"
+        android:background="@drawable/button_design"/>
 
-    <Button android:id="@+id/btn2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="schedule"/>
+    <Button android:id="@+id/btn2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="schedule"
+        android:background="@drawable/button_design"/>
 
-    <Button android:id="@+id/btn3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="diary"/>
+    <Button android:id="@+id/btn3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="diary"
+        android:background="@drawable/button_design"/>
 
-    <Button android:id="@+id/btn4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="setting"/>
+    <Button android:id="@+id/btn4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="setting"
+        android:background="@drawable/button_design"/>
 
 </LinearLayout>
 

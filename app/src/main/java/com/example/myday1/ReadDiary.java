@@ -7,6 +7,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,14 +57,24 @@ public class ReadDiary extends AppCompatActivity {
         del = (Button)findViewById(R.id.delete);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
+
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+       // btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        iv_btn.setColorFilter(filter);
+       // btn4.setAlpha(0.93f);
+
         mod.setBackgroundColor(color);
         mod.setAlpha(0.6f);
         del.setBackgroundColor(color);

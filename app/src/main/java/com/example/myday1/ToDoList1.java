@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,25 +58,49 @@ public class ToDoList1 extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
-        start_btn.setBackgroundColor(color);
-        start_btn.setAlpha(0.8f);
 
-        b1.setBackgroundColor(color);
-        b1.setAlpha(0.66f);
-        b2.setBackgroundColor(color);
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        //btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn4.setAlpha(0.93f);
+
+
+        iv_btn=b1.getBackground();
+        iv_btn.setColorFilter(filter);
+        b1.setAlpha(0.75f);
+
+        iv_btn=b2.getBackground();
+        iv_btn.setColorFilter(filter);
         b2.setAlpha(0.75f);
-        b3.setBackgroundColor(color); b3.setAlpha(0.75f);
-        b4.setBackgroundColor(color); b4.setAlpha(0.84f);
-        b5.setBackgroundColor(color); b5.setAlpha(0.84f);
-        b6.setBackgroundColor(color); b6.setAlpha(0.93f);
+
+        iv_btn=b3.getBackground();
+        iv_btn.setColorFilter(filter);
+        b3.setAlpha(0.75f);
+
+        iv_btn=b4.getBackground();
+        iv_btn.setColorFilter(filter);
+        b4.setAlpha(0.75f);
+
+        iv_btn=b5.getBackground();
+        iv_btn.setColorFilter(filter);
+        b5.setAlpha(0.75f);
+
+        iv_btn=b6.getBackground();
+        iv_btn.setColorFilter(filter);
+        b6.setAlpha(0.75f);
+
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

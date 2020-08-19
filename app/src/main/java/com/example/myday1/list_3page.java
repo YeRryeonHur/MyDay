@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -79,15 +82,24 @@ public class list_3page extends Activity {
         listview = findViewById(R.id.listv);
         listview.setAdapter(adapter);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 0);
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
+        color = pref.getInt("key2", 100);
+
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+      //  btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        iv_btn.setColorFilter(filter);
+      //  btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+        iv_btn.setColorFilter(filter);
+       // btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        iv_btn.setColorFilter(filter);
+      //  btn4.setAlpha(0.93f);
         keys = PreferenceManager.getArray(this, "key_list");
         for(int i = keys.size() - 1; i > -1; i--){
             day = Integer.parseInt(keys.get(i));

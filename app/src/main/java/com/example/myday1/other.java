@@ -2,6 +2,10 @@ package com.example.myday1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -44,14 +48,51 @@ public class other extends AppCompatActivity {
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
 
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
+
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        //btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        iv_btn.setColorFilter(filter);
+       // btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+        iv_btn.setColorFilter(filter);
+       // btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        iv_btn.setColorFilter(filter);
+        //btn4.setAlpha(0.93f);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), colorchange.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
     }
 
     public void btnOther(View v)

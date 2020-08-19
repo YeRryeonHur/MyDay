@@ -12,7 +12,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     int day;
     Integer today;
     Integer nowMonth;
-    Button btn3, btn1, btn2, btn4;
+    public static Button btn3, btn1, btn2, btn4;
     TextView tv1;
     public static Context context;
 
@@ -82,14 +85,26 @@ public class MainActivity extends AppCompatActivity {
         tv1 = (TextView)findViewById(R.id.saying);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
-        btn1.setBackgroundColor(color);
-        btn1.setAlpha(0.66f);
-        btn2.setBackgroundColor(color);
-        btn2.setAlpha(0.75f);
-        btn3.setBackgroundColor(color);
-        btn3.setAlpha(0.84f);
-        btn4.setBackgroundColor(color);
-        btn4.setAlpha(0.93f);
+
+        Drawable iv_btn=btn1.getBackground();
+        ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        //btn1.setAlpha(0.66f);
+
+        iv_btn=btn2.getBackground();
+        filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        //btn2.setAlpha(0.75f);
+
+        iv_btn=btn3.getBackground();
+       filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+       // btn3.setAlpha(0.84f);
+
+        iv_btn=btn4.getBackground();
+        filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+       // btn4.setAlpha(0.93f);
 
         ImageView iv_last =  (ImageView)findViewById(R.id.iv_lastmonth);
         ImageView iv_next =  (ImageView)findViewById(R.id.iv_nextmonth);
