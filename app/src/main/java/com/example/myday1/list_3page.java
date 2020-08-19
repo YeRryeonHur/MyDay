@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -128,6 +129,7 @@ public class list_3page extends Activity {
      });//floating action button 사용
         fab.setBackgroundColor(color);
         fab.setRippleColor(color);
+        fab.setBackgroundTintList(ColorStateList.valueOf(color));
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

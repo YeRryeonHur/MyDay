@@ -46,10 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_margin="16dp"
             android:clickable="true"
             android:visibility="visible"
-            android:backgroundTint="#DFDDDD"
+            android:layout_margin="16dp"
             app:srcCompat="@drawable/ic_add_to_photos_black_24dp"
             tools:ignore="VectorDrawableCompat"
             android:focusable="true" />
