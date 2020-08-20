@@ -5,6 +5,13 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
@@ -17,10 +24,16 @@ public class NewAppWidget extends AppWidgetProvider {
 
         int list = MainActivity.list;
         int color = MainActivity.color;
+        String arr[];
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        views.setTextColor(R.id.button1, color);
+        views.setTextColor(R.id.button2, color);
+        views.setTextColor(R.id.button3, color);
+        views.setTextColor(R.id.button4, color);
 
-        String arr[] = MainActivity.arr;
+        arr = MainActivity.arr;
+
         views.setTextViewText(R.id.saying, arr[list]);
 
         Intent intent = new Intent(context, MainActivity.class);
@@ -31,7 +44,7 @@ public class NewAppWidget extends AppWidgetProvider {
         PendingIntent pending2 = PendingIntent.getActivity(context, 0, intent2, 0);
         views.setOnClickPendingIntent(R.id.button2, pending2);
 
-        Intent intent3 = new Intent(context, ReadDiary.class);
+        Intent intent3 = new Intent(context, list_3page.class);
         PendingIntent pending3 = PendingIntent.getActivity(context, 0, intent3, 0);
         views.setOnClickPendingIntent(R.id.button3, pending3);
 
@@ -46,7 +59,6 @@ public class NewAppWidget extends AppWidgetProvider {
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them

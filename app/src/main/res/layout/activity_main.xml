@@ -80,12 +80,14 @@
         android:layout_gravity="center"
         android:layout_weight="1">
         <Button
+            android:layout_marginLeft="3dp"
             android:id="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="home"
             android:textColor="#000000"
             android:background="@drawable/button_design"
+            android:layout_marginRight="3dp"
             />
         <Button
             android:id="@+id/btn2"
@@ -95,7 +97,8 @@
             android:onClick="schedule"
             android:text="schedule"
             android:textColor="#000000"
-            android:background="@drawable/button_design"/>
+            android:background="@drawable/button_design"
+            android:layout_marginRight="3dp"/>
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
@@ -104,7 +107,8 @@
             android:onClick="diary"
             android:text="Diary"
             android:textColor="#000000"
-            android:background="@drawable/button_design"/>
+            android:background="@drawable/button_design"
+            android:layout_marginRight="3dp"/>
         <Button
             android:id="@+id/btn4"
             android:layout_width="wrap_content"
@@ -113,7 +117,8 @@
             android:onClick="setting"
             android:text="setting"
             android:textColor="#000000"
-            android:background="@drawable/button_design"/>
+            android:background="@drawable/button_design"
+            android:layout_marginRight="3dp"/>
 
     </LinearLayout>
 

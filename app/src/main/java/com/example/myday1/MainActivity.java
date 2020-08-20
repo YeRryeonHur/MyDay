@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
             if (position%7==6){
                 holder.tvItemGridView.setTextColor(getResources().getColor(R.color.saturday));
             }
-            if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
+            if (sToday.equals(getItem(position)) && (showM == (nowMonth+1))) { //오늘 day 텍스트 컬러 변경
                 holder.tvItemGridView.setTextColor(getResources().getColor(R.color.day));
             }
             return convertView;
