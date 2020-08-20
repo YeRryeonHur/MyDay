@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
     int showM,showY, color=0;
     int test=0;
     int dayNum;
-    public int list;
+    public static int list;
+    public static String arr[];
     int day;
     Integer today;
     Integer nowMonth;
@@ -206,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         list = (showM*30+dayNum)%100+1;
         context = this;
         Resources resources = getResources();
-        String []arr = resources.getStringArray(R.array.goodsaying);
+        arr = resources.getStringArray(R.array.goodsaying);
         tv1.setText(arr[list]);
     }
 
