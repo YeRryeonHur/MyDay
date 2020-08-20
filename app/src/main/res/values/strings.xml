@@ -102,5 +102,7 @@
         <item> 만일 날마다 거절당하지 않는다면, 자신의 목표가 충분히 야심차지 않은 것이다.[크리스 딕슨]</item>
         <item> 실험이 많을수록, 더 좋은 결과를 이끌어낸다. [에머슨]</item>
     </string-array>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

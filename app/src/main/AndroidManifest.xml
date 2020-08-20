@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myday1">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,23 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".ToDoList1"/>
-        <activity android:name=".ToDoList2"/>
-        <activity android:name=".other"/>
-        <activity android:name=".colorchange"/>
-        <activity android:name=".NewWriting"/>
-        <activity android:name=".ReadDiary"/>
-        <activity android:name=".list_3page"/>
-        <activity android:name=".TimeTable"/>
-
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ToDoList1" />
+        <activity android:name=".ToDoList2" />
+        <activity android:name=".other" />
+        <activity android:name=".colorchange" />
+        <activity android:name=".NewWriting" />
+        <activity android:name=".ReadDiary" />
+        <activity android:name=".list_3page" />
+        <activity android:name=".TimeTable" />
     </application>
 
 </manifest>
