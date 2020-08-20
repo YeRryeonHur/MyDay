@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
     Date date;
     SimpleDateFormat curYearFormat;
     SimpleDateFormat curMonthFormat;
-    int showM,showY, color=0;
+    int showM,showY;
+    public static int color=0;
     int test=0;
     int dayNum;
     public static int list;
