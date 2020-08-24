@@ -40,7 +40,7 @@
                 android:id="@+id/studybtn"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
 
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:background="@drawable/button_design"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="60dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
 
@@ -78,7 +78,7 @@
                 android:layout_height="70dp"
 
                 android:background="@drawable/button_design"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_weight="1"
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:background="@drawable/button_design"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="60dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_weight="1"
@@ -115,9 +115,9 @@
                 android:layout_height="70dp"
 
                 android:background="@drawable/button_design"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
 
                 android:layout_weight="1"
                 android:gravity="center"
@@ -130,7 +130,7 @@
                 android:id="@+id/otherbtn"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="60dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
