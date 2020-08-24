@@ -40,9 +40,9 @@
                 android:id="@+id/studybtn"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
 
                 android:background="@drawable/button_design"
                 android:layout_weight="1"
@@ -56,9 +56,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:background="@drawable/button_design"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
 
                 android:layout_weight="1"
                 android:gravity="center"
@@ -78,9 +78,9 @@
                 android:layout_height="70dp"
 
                 android:background="@drawable/button_design"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="운동하기"
@@ -92,9 +92,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:background="@drawable/button_design"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="책 읽기"
@@ -115,9 +115,9 @@
                 android:layout_height="70dp"
 
                 android:background="@drawable/button_design"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
 
                 android:layout_weight="1"
                 android:gravity="center"
@@ -130,7 +130,7 @@
                 android:id="@+id/otherbtn"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
@@ -188,42 +188,42 @@
         android:layout_weight="1">
         <Button
             android:id="@+id/btn1"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:background="@drawable/button_design"
             android:text="home"
-            android:layout_marginRight="3dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"
+            />
         <Button
             android:id="@+id/btn2"
+            android:layout_marginRight="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:background="@drawable/button_design"
             android:text="schedule"
-            android:layout_marginRight="3dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"/>
         <Button
             android:id="@+id/btn3"
+            android:layout_marginRight="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:background="@drawable/button_design"
             android:text="Diary"
-            android:layout_marginRight="3dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"/>
         <Button
             android:id="@+id/btn4"
+            android:layout_marginRight="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:background="@drawable/button_design"
-            android:onClick="setting"
             android:text="setting"
-            android:layout_marginRight="3dp"
-
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="@drawable/button_design"/>
 
     </LinearLayout>
 
