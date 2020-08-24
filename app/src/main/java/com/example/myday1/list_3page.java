@@ -11,6 +11,7 @@ import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -148,7 +149,9 @@ public class list_3page extends Activity {
             }
         });
 
-
+        PaintDrawable pd = new PaintDrawable(color);
+        pd.setAlpha(70);
+        listview.setSelector(pd);
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override

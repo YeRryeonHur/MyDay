@@ -206,7 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
         today = mCal.get(Calendar.DAY_OF_MONTH);
 
-        gridView.setSelector(new ColorDrawable(color));
+        PaintDrawable pd = new PaintDrawable(color);
+        pd.setAlpha(70);
+        gridView.setSelector(pd);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
