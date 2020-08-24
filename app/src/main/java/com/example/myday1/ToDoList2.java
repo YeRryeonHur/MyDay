@@ -239,7 +239,7 @@ public class ToDoList2 extends AppCompatActivity {
                                     myTimer.sendEmptyMessage(0);
                                     long now=System.currentTimeMillis();
                                     Date mDate=new Date(now);
-                                    SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm:ss");
+                                    SimpleDateFormat simpleDate=new SimpleDateFormat("HH:mm:ss");
                                     start_time=simpleDate.format(mDate);
                                     cur_Status=Run;
 
@@ -384,7 +384,7 @@ public class ToDoList2 extends AppCompatActivity {
                 myTimer.removeMessages(0);
                 long now=System.currentTimeMillis();
                 Date mDate=new Date(now);
-                SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm:ss");
+                SimpleDateFormat simpleDate=new SimpleDateFormat("HH:mm:ss");
                 finish_time=simpleDate.format(mDate);
 
                 /**

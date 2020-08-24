@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로딩 화면
@@ -17,6 +18,9 @@ public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로�
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
         }
+        TextView tv_start;
+        tv_start = (TextView)findViewById(R.id.start);
+        tv_start.setTextColor(color);
 
         Handler handler = new Handler();//핸들러 만들기
         handler.postDelayed(new Runnable() {
