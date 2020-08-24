@@ -82,11 +82,14 @@ public class ReadDiary extends AppCompatActivity {
         iv_btn.setColorFilter(filter);
        // btn4.setAlpha(0.93f);
 
-        iv_btn=mod.getBackground();
+        Button save_but=findViewById(R.id.save);
+        iv_btn = save_but.getBackground();
         iv_btn.setColorFilter(filter);
 
-        iv_btn=del.getBackground();
-        iv_btn.setColorFilter(filter);
+        mod.setBackgroundColor(color);
+        mod.setAlpha(0.6f);
+        del.setBackgroundColor(color);
+        del.setAlpha(0.8f);
         //KEY값 받아오기
         Intent it = getIntent();
         key_int = it.getIntExtra("day_check", 0);
