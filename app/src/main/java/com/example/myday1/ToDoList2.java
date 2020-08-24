@@ -233,8 +233,9 @@ public class ToDoList2 extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //intent(pos);
                                     doingnow=(String)Adapter.getItem(pos);
-                                    finalConvertView.setBackgroundColor(color);
-                                    finalConvertView.setAlpha(0.75f);
+                                    TextView tt1=(TextView)finalConvertView.findViewById(R.id.listtext);
+                                    tt1.setTextColor(color);
+
                                     myBaseTime = SystemClock.elapsedRealtime();
                                     myTimer.sendEmptyMessage(0);
                                     long now=System.currentTimeMillis();
@@ -463,15 +464,5 @@ public class ToDoList2 extends AppCompatActivity {
         manager.notify(1,builder.build());
     }
 
-    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(0,0);
-        finish();
-
-    }
 
 }
