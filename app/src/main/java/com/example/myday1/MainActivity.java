@@ -431,23 +431,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void home(View v){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        finish();
-    }*/
-    public void schedule(View v){
-        Intent it=new Intent(getApplicationContext(),ToDoList1.class);
-        startActivity(it);
-        overridePendingTransition(0,0);
-        finish();
-    }
-    public void setting(View v){
-        Intent intent = new Intent(getApplicationContext(), colorchange.class);
-        startActivity(intent);
-        overridePendingTransition(0,0);
-        finish();
-    }
+
 
 
 
