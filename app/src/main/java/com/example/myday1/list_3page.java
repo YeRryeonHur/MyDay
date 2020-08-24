@@ -14,8 +14,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,14 +23,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -70,9 +67,11 @@ public class list_3page extends Activity {
     ArrayList<String> keys;
     TextView tv1;
     Data data;
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_3);
         context=this;
@@ -171,9 +170,13 @@ public class list_3page extends Activity {
                 finish();
             }
         });
+        listview.setSelector(new PaintDrawable(color));
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 view.setBackgroundColor(color);
                 Intent intent = new Intent(getApplicationContext(), ReadDiary.class);
                 day_write=list.get(position).getDate();
