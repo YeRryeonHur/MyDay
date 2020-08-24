@@ -185,7 +185,7 @@ public class list_3page extends Activity {
         if(exist()){
             fab.setVisibility(View.INVISIBLE);
         }
-        else fab.setVisibility(View.VISIBLE);
+         else fab.setVisibility(View.VISIBLE);
         //일기버튼 추가 or 안보이게
     }
     class listAdapter extends BaseAdapter{
