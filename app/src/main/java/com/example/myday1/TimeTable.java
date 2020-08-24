@@ -48,6 +48,8 @@ public class TimeTable extends AppCompatActivity {
     String[] TIME; //시작, 끝 시각
     private String curDate=MainActivity.DATE;
     private Intent it;
+    //timetable 날짜로
+    TextView tv_timetable;
 
     private ArrayList<ListViewItem> temp1=new ArrayList<>();
     private ArrayList<String>temp2=new ArrayList<>();
@@ -77,8 +79,12 @@ public class TimeTable extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
         }
+        int year_int = (Integer.parseInt(curDate) / 10000)/100;
 
-
+        int month_int = (Integer.parseInt(curDate) / 100) % 100;
+        int day_int = Integer.parseInt(curDate) % 100;
+        tv_timetable = (TextView)findViewById(R.id.today_date);
+        tv_timetable.setText(year_int+"/"+month_int+"/"+day_int);
 
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
