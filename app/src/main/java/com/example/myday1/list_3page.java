@@ -11,6 +11,7 @@ import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,6 +85,10 @@ public class list_3page extends Activity {
         listview.setAdapter(adapter);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
+
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
 
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);

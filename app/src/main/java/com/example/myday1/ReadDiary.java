@@ -13,6 +13,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -57,6 +58,12 @@ public class ReadDiary extends AppCompatActivity {
         del = (Button)findViewById(R.id.delete);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
+
+
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
+
 
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
