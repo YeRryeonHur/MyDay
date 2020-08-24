@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -67,6 +68,13 @@ public class NewWriting extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
+
+
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
+
+
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
         iv_btn.setColorFilter(filter);

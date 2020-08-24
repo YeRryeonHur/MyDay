@@ -16,6 +16,7 @@ import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         tv1 = (TextView)findViewById(R.id.saying);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 0);
+
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
 
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
