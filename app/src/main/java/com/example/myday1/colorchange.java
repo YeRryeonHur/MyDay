@@ -188,6 +188,10 @@ public class colorchange extends AppCompatActivity {
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putInt("key2", color);
                         editor.commit();
+
+                        if(Build.VERSION.SDK_INT >= 21){
+                            getWindow().setStatusBarColor(color);
+                        }
                     }
 
                     @Override
