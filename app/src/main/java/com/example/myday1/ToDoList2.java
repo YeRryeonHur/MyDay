@@ -53,7 +53,7 @@ public class ToDoList2 extends AppCompatActivity {
     private String doingnow, start_time, finish_time; //지금 하고 있는 것
     Button btn3, btn1, btn2, btn4;
     private TextView output;
-    int color=100;
+    int color=-8331542;
     private Button completebtn,stopbtn;
     public static boolean flag=true;
     TextView tv1;
@@ -84,7 +84,7 @@ public class ToDoList2 extends AppCompatActivity {
         stopbtn = findViewById(R.id.stopbtn);
 
       pref=getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 100);
+        color = pref.getInt("key2", -8331542);
 
 
         if(Build.VERSION.SDK_INT >= 21){

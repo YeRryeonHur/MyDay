@@ -87,7 +87,7 @@ public class list_3page extends Activity {
         listview = findViewById(R.id.listv);
         listview.setAdapter(adapter);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 100);
+        color = pref.getInt("key2", -8331542);
 
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);

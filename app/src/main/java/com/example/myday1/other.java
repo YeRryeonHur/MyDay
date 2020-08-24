@@ -31,7 +31,7 @@ public class other extends AppCompatActivity {
         it=getIntent();
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 100);
+        color = pref.getInt("key2", -8331542);
         editmemo=findViewById(R.id.edit);
         imm.hideSoftInputFromWindow(editmemo.getWindowToken(),0);
         editmemo.setTextIsSelectable(true); //커서 보이게

@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         btn4 = (Button)findViewById(R.id.btn4);
         tv1 = (TextView)findViewById(R.id.saying);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 0);
+        color = pref.getInt("key2", -8331542);
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
         }
@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                finish();
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
@@ -231,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("chooseDate",YEAR+MONTH+Day);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                finish();
 
                 //Toast.makeText(getApplicationContext(), "test = " + day, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), "position: "  + position, Toast.LENGTH_SHORT).show();

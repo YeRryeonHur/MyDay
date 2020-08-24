@@ -57,7 +57,7 @@ public class ReadDiary extends AppCompatActivity {
         mod = (Button)findViewById(R.id.modify);
         del = (Button)findViewById(R.id.delete);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 100);
+        color = pref.getInt("key2", -8331542);
 
 
         if(Build.VERSION.SDK_INT >= 21){

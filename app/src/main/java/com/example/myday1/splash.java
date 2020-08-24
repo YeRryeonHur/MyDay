@@ -14,7 +14,7 @@ public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로�
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_splash);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 0);
+        color = pref.getInt("key2", -8331542);
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
         }

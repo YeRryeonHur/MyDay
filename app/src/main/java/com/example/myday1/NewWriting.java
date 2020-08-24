@@ -67,7 +67,7 @@ public class NewWriting extends AppCompatActivity {
         save_diary= (Button)findViewById(R.id.save_diary);
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 0);
+        color = pref.getInt("key2", -8331542);
 
 
         if(Build.VERSION.SDK_INT >= 21){

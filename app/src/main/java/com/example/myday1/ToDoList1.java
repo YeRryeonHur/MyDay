@@ -34,7 +34,7 @@ public class ToDoList1 extends AppCompatActivity {
     TextView memotext, tv1;
     Button btn3, btn1, btn2, btn4;
     Intent it;
-    int color=100;
+    int color=-8331542;
     final static int CODE = 1;
     boolean std = false, bok = false, brk = false, fod = false, exe = false;
     public static ArrayList<String> list = new ArrayList<>();
@@ -58,7 +58,7 @@ public class ToDoList1 extends AppCompatActivity {
 
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 100);
+        color = pref.getInt("key2", -8331542);
 
 
         if(Build.VERSION.SDK_INT >= 21){

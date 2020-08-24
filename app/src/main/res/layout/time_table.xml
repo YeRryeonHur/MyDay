@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:textSize="50dp"
         android:text=" Time_Table"
+        android:layout_marginLeft="20dp"
         android:id="@+id/today_date"/>
 
 <LinearLayout

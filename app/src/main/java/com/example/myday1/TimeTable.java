@@ -73,7 +73,7 @@ public class TimeTable extends AppCompatActivity {
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        color = pref.getInt("key2", 100);
+        color = pref.getInt("key2", -8331542);
 
 
         if(Build.VERSION.SDK_INT >= 21){
