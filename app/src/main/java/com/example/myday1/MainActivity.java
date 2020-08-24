@@ -124,7 +124,24 @@ public class MainActivity extends AppCompatActivity {
          */
         SimpleDateFormat simpleDate=new SimpleDateFormat("yyyyMMdd");
         DATE=simpleDate.format(date);
-
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +149,15 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 overridePendingTransition(0,0);
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), colorchange.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
             }
         });
         //연,월,일을 따로 저장
