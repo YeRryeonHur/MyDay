@@ -170,6 +170,7 @@ public class list_3page extends Activity {
                 finish();
             }
         });
+
         listview.setSelector(new PaintDrawable(color));
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
