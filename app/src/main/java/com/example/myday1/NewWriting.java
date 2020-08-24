@@ -314,7 +314,7 @@ public class NewWriting extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), list_3page.class);
         startActivity(intent);
         overridePendingTransition(0,0);
         finish();

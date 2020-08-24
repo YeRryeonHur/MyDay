@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                finish();
             }
         });
         //연,월,일을 따로 저장
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         mCal = Calendar.getInstance();
 
-        //이번달 1일 무슨요일인지 판단 mCal.set(Year,Month,Day)
+        //이번달 1일 무슨요일인지 판단F mCal.set(Year,Month,Day)
         mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
         dayNum = mCal.get(Calendar.DAY_OF_WEEK);
         //1일 - 요일 매칭 시키기 위해 공백 add
