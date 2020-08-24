@@ -15,7 +15,9 @@ import android.content.res.Resources;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -204,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
         today = mCal.get(Calendar.DAY_OF_MONTH);
 
+        gridView.setSelector(new ColorDrawable(color));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -215,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                  * 선택한 날짜 넣어주기
                  */
 
-               String[] strArr=tvDate.getText().toString().split("/");
+                String[] strArr=tvDate.getText().toString().split("/");
 
                 String YEAR=strArr[0];
                 String MONTH=strArr[1];
