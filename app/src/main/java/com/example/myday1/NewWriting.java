@@ -92,7 +92,8 @@ public class NewWriting extends AppCompatActivity {
         iv_btn.setColorFilter(filter);
         //btn4.setAlpha(0.93f);
 
-        save_diary.setBackgroundColor(color);
+        iv_btn=save_diary.getBackground();
+        iv_btn.setColorFilter(filter);
 
         SimpleDateFormat YEAR = new SimpleDateFormat("yy", Locale.getDefault());
         SimpleDateFormat MONTH = new SimpleDateFormat("MM", Locale.getDefault());
