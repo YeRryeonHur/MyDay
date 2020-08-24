@@ -11,6 +11,7 @@ import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,6 +88,10 @@ public class list_3page extends Activity {
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
 
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
+
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
         iv_btn.setColorFilter(filter);
@@ -127,9 +132,10 @@ public class list_3page extends Activity {
              Intent intent = new Intent(getApplicationContext(), NewWriting.class);
              startActivity(intent);
              overridePendingTransition(0,0);
+             finish();
          }
      });//floating action button 사용
-         fab.setBackgroundColor(color);
+        fab.setBackgroundColor(color);
         fab.setRippleColor(color);
         fab.setBackgroundTintList(ColorStateList.valueOf(color));
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +188,7 @@ public class list_3page extends Activity {
         if(exist()){
             fab.setVisibility(View.INVISIBLE);
         }
-        else fab.setVisibility(View.VISIBLE);
+         else fab.setVisibility(View.VISIBLE);
         //일기버튼 추가 or 안보이게
     }
     class listAdapter extends BaseAdapter{

@@ -86,6 +86,12 @@ public class ToDoList2 extends AppCompatActivity {
       pref=getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", 100);
 
+
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
+
+
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
         iv_btn.setColorFilter(filter);
