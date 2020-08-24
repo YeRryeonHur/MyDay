@@ -88,20 +88,19 @@ public class colorchange extends AppCompatActivity {
                 finish();
             }
         });
-
-        btn3.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), list_3page.class);
+                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
                 finish();
             }
         });
-        btn2.setOnClickListener(new View.OnClickListener() {
+        btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
                 finish();

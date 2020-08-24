@@ -14,6 +14,7 @@ public class Data {
     }
 
     public int getEmot() {
+
         return Emot;
     }
 

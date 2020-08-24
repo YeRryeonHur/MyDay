@@ -58,6 +58,7 @@ public class list_3page extends Activity {
     private Context context;
     ListView listview;
     FrameLayout frame;
+    List<Data> lists;
     Button btn4, btn2, btn1, btn3;
     FloatingActionButton fab;
     String date1="", date2="";
@@ -66,6 +67,7 @@ public class list_3page extends Activity {
     ArrayList<Data> list;
     ArrayList<String> keys;
     TextView tv1;
+    Data data;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +166,7 @@ public class list_3page extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), ReadDiary.class);
+                day_write=list.get(position).getDate();
                 intent.putExtra("day_check", day_write);
                 startActivity(intent);
                 overridePendingTransition(0,0);
@@ -215,8 +218,8 @@ public class list_3page extends Activity {
             TextView date = view.findViewById(R.id.date_show);
             ImageView iv = view.findViewById(R.id.iv_img);
 
-            Data data = lists.get(i);
 
+            data = lists.get(i);
             day_write=data.getDate();
             year_a = day_write/10000;
             month_a = (day_write/100)%100;
