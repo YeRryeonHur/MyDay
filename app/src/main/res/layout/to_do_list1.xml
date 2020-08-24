@@ -39,9 +39,12 @@
             <Button
                 android:id="@+id/studybtn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:background="@drawable/ic_crop_3_2_black_24dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:background="@drawable/button_design"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:onClick="btnMain"
@@ -51,9 +54,12 @@
             <Button
                 android:id="@+id/foodbtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_crop_3_2_black_24dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button_design"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="밥 먹기"
@@ -69,10 +75,12 @@
             <Button
                 android:id="@+id/exercisebtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
 
-                android:background="@drawable/ic_crop_3_2_black_24dp"
-                android:layout_marginLeft="25dp"
+                android:background="@drawable/button_design"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="운동하기"
@@ -82,9 +90,11 @@
             <Button
                 android:id="@+id/bookbtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_crop_3_2_black_24dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button_design"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="책 읽기"
@@ -102,10 +112,13 @@
             <Button
                 android:id="@+id/breakbtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
 
-                android:background="@drawable/ic_crop_3_2_black_24dp"
-                android:layout_marginLeft="25dp"
+                android:background="@drawable/button_design"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+
                 android:layout_weight="1"
                 android:gravity="center"
 
@@ -116,11 +129,13 @@
             <Button
                 android:id="@+id/otherbtn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:background="@drawable/ic_crop_3_2_black_24dp"
+                android:background="@drawable/button_design"
                 android:text="기타"
                 android:textSize="20sp"
                 android:onClick="btnMain"/>
@@ -128,19 +143,21 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:orientation="vertical"
             android:layout_weight="5">
 
             <TextView
                 android:id="@+id/memo"
                 android:layout_gravity="center"
                 android:layout_width="300dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
                 android:paddingTop="20dp"
-                android:gravity="top|center"
+
                 android:background="@drawable/text_border"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -151,9 +168,10 @@
 
             <Button
                 android:id="@+id/startbtn"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
+                android:layout_width="70dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="right"
                 android:background="@drawable/ic_forward_black_24dp"
                 android:gravity="center"
                 android:onClick="btnMain"
@@ -161,7 +179,7 @@
                 android:textSize="15sp" />
 
 
-        </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -175,6 +193,7 @@
             android:clickable="true"
             android:background="@drawable/button_design"
             android:text="home"
+            android:layout_marginRight="3dp"
             android:textColor="#000000"/>
         <Button
             android:id="@+id/btn2"
@@ -183,6 +202,7 @@
             android:clickable="true"
             android:background="@drawable/button_design"
             android:text="schedule"
+            android:layout_marginRight="3dp"
             android:textColor="#000000"/>
         <Button
             android:id="@+id/btn3"
@@ -191,6 +211,7 @@
             android:clickable="true"
             android:background="@drawable/button_design"
             android:text="Diary"
+            android:layout_marginRight="3dp"
             android:textColor="#000000"/>
         <Button
             android:id="@+id/btn4"
@@ -200,6 +221,7 @@
             android:background="@drawable/button_design"
             android:onClick="setting"
             android:text="setting"
+            android:layout_marginRight="3dp"
 
             android:textColor="#000000"/>
 
