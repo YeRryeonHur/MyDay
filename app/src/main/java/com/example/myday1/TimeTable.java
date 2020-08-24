@@ -79,10 +79,9 @@ public class TimeTable extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
         }
-        int year_int = (Integer.parseInt(curDate) / 10000)/100;
-
-        int month_int = (Integer.parseInt(curDate) / 100) % 100;
-        int day_int = Integer.parseInt(curDate) % 100;
+        int year_int = (Integer.parseInt(val) / 10000)/100;
+        int month_int = (Integer.parseInt(val) / 100) % 100;
+        int day_int = Integer.parseInt(val) % 100;
         tv_timetable = (TextView)findViewById(R.id.today_date);
         tv_timetable.setText(year_int+"/"+month_int+"/"+day_int);
 
