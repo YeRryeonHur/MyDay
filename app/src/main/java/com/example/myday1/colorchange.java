@@ -29,7 +29,7 @@ import java.util.Calendar;
 import petrov.kristiyan.colorpicker.ColorPicker;
 
 public class colorchange extends AppCompatActivity {
-    private Button button, btn1, btn2, btn3, btn4, col_change;
+    private Button button, btn1, btn2, btn3, btn4, col_change, button_info;
     private LinearLayout layout1, layout2, layout3;
     private TextView top;
     TextView tv1;
@@ -44,11 +44,11 @@ public class colorchange extends AppCompatActivity {
         tv1 = (TextView)findViewById(R.id.saying);
         tv1.setText(arr[list]);
         button = (Button) findViewById(R.id.change);
+        button_info = (Button)findViewById(R.id.information);
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
         btn4 = (Button)findViewById(R.id.btn4);
-        col_change = (Button)findViewById(R.id.change);
         layout1 = (LinearLayout) findViewById(R.id.top);
         layout2 = (LinearLayout) findViewById(R.id.middle);
         layout3 = (LinearLayout) findViewById(R.id.bottom);
@@ -76,8 +76,11 @@ public class colorchange extends AppCompatActivity {
         iv_btn.setColorFilter(filter);
        // btn4.setAlpha(0.93f);
 
-        col_change.setBackgroundColor(color);
-        col_change.setAlpha(0.8f);
+        iv_btn = button_info.getBackground();
+        iv_btn.setColorFilter(filter);
+
+        iv_btn = button.getBackground();
+        iv_btn.setColorFilter(filter);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +88,24 @@ public class colorchange extends AppCompatActivity {
                 openColorPicker();
             }
         });
+        button_info.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                AlertDialog.Builder ad = new AlertDialog.Builder(colorchange.this);
+                ad.setTitle("개발자 정보");
+                ad.setMessage(
+                        "경북대학교 모바일 공학과 19학번\n" +
+                        "박은화 성자민 이시언 허예련" +
+                        "\n로고 출처 : ...");
+
+                ad.setNegativeButton("BACK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                ad.show();
+            }});
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +159,10 @@ public class colorchange extends AppCompatActivity {
         });
     }
 
+
+
+
+
     public void openColorPicker() {
         final ColorPicker colorPicker = new ColorPicker(this);  // ColorPicker 객체 생성
         ArrayList<String> colors = new ArrayList<>();  // Color 넣어줄 list
@@ -183,8 +208,6 @@ public class colorchange extends AppCompatActivity {
                         iv_btn=btn4.getBackground();
                         iv_btn.setColorFilter(filter);
 
-                        col_change.setBackgroundColor(color);
-                        col_change.setAlpha(0.5f);
                         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putInt("key2", color);
