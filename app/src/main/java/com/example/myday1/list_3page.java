@@ -171,6 +171,7 @@ public class list_3page extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setBackgroundColor(color);
                 Intent intent = new Intent(getApplicationContext(), ReadDiary.class);
                 day_write=list.get(position).getDate();
                 intent.putExtra("day_check", day_write);
