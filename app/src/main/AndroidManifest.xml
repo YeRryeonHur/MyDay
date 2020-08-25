@@ -39,6 +39,9 @@
         <activity android:name=".ReadDiary" />
         <activity android:name=".list_3page" />
         <activity android:name=".TimeTable" />
+        <service android:name=".MyTimerService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

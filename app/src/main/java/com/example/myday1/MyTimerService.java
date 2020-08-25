@@ -9,6 +9,8 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.SystemClock;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -17,66 +19,54 @@ import java.util.TimerTask;
 
 
 public class MyTimerService extends Service {
-    long myBaseTime;
+    long myBaseTime=ToDoList2.myBaseTime;
     public MyTimerService(){
 
     }
-    private String time;
+   private String count;
 
-    IMyTimerService.Stub binder=new IMyTimerService.Stub() {
-        @Override
-        public String getCount() throws RemoteException {
-            return time;
-        }
 
-        @Override
-        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+   IMyTimerService.Stub binder=new IMyTimerService.Stub() {
+       @Override
+       public String getCount() {
+           return count;
+       }
 
-        }
-    };
+       @Override
+       public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
 
-    private static Timer timer = new Timer();
-    private Context ctx;
+       }
+   };
 
-    public IBinder onBind(Intent arg0)
-    {
-        return null;
-    }
-
+   @Override
     public void onCreate()
     {
         super.onCreate();
-        ctx = this;
-        startService();
+        Thread Timer=new Thread(new Timer());
+        Timer.start();
     }
 
-    private void startService()
-    {
+    private boolean isStop;
 
-    }
-
-    private class mainTask extends TimerTask
-    {
-        public void run()
-        {
-            myTimer.sendEmptyMessage(0);
-        }
-    }
-
+   @Override
     public void onDestroy()
     {
         super.onDestroy();
-     //   Toast.makeText(this, "Service Stopped ...", Toast.LENGTH_SHORT).show();
+        isStop=true;
     }
 
-    private final Handler myTimer = new Handler()
-    {
-        @SuppressLint("HandlerLeak")
-        public void handleMessage(Message msg) {
-         //   output.setText(getTimeOut());
-            myTimer.sendEmptyMessage(0);
-        }
-    };
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return binder;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent){
+        isStop=true;
+        return super.onUnbind(intent);
+    }
+
 
     String getTimeOut() {
         long now = SystemClock.elapsedRealtime();
@@ -91,5 +81,28 @@ public class MyTimerService extends Service {
         return real_outTime;
     }
 
+    private class Timer implements Runnable{
+
+        private Handler handler=new Handler();
+        @Override
+        public void run() {
+            while(true){
+                count=getTimeOut();
+                if(isStop) break;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),count+" ",Toast.LENGTH_SHORT);
+                    }
+                });
+                try{
+                    Thread.sleep(1000);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }

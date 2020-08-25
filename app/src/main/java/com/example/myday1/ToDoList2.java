@@ -5,9 +5,11 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -18,8 +20,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,12 +67,25 @@ public class ToDoList2 extends AppCompatActivity {
 
     int cur_Status; //현재의 상태를 저장할변수를 초기화함.
     int myCount = 1;
-    long myBaseTime;
+    public static long myBaseTime;
     long myPauseTime;
 
     public NotificationManager manager;
     public NotificationCompat.Builder builder;
     SharedPreferences pref;
+
+  private IMyTimerService binder;
+  private ServiceConnection connection=new ServiceConnection() {
+      @Override
+      public void onServiceConnected(ComponentName name, IBinder service) {
+          binder=IMyTimerService.Stub.asInterface(service);
+      }
+
+      @Override
+      public void onServiceDisconnected(ComponentName name) {
+
+      }
+  };
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +143,7 @@ public class ToDoList2 extends AppCompatActivity {
         String []arr = resources.getStringArray(R.array.goodsaying);
         tv1 = (TextView)findViewById(R.id.saying);
         tv1.setText(arr[list]);
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +174,7 @@ public class ToDoList2 extends AppCompatActivity {
         });
 
 
-        Intent intent = getIntent();
+
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);
 
         listView = findViewById(R.id.list);
@@ -237,12 +255,17 @@ public class ToDoList2 extends AppCompatActivity {
                                     tt1.setTextColor(color);
 
                                     myBaseTime = SystemClock.elapsedRealtime();
-                                    myTimer.sendEmptyMessage(0);
+                                  // myTimer.sendEmptyMessage(0);
+                                    Intent intent=new Intent(ToDoList2.this, MyTimerService.class);
+                                    bindService(intent,connection,BIND_AUTO_CREATE);
+                                    cur_Status=Run;
+                                    new Thread(new GetTimerThread()).start();
+
                                     long now=System.currentTimeMillis();
                                     Date mDate=new Date(now);
                                     SimpleDateFormat simpleDate=new SimpleDateFormat("HH:mm:ss");
                                     start_time=simpleDate.format(mDate);
-                                    cur_Status=Run;
+
 
                                     boolean noti = PreferenceManager.getBoolean(ToDoList2.this, "alert");
                                     if(noti) showNoti();
@@ -357,32 +380,50 @@ public class ToDoList2 extends AppCompatActivity {
                     case Init:
                         flag = true;
                         myBaseTime = SystemClock.elapsedRealtime();
-                        myTimer.sendEmptyMessage(0);
+
+                       // myTimer.sendEmptyMessage(0);
                         stopbtn.setText("일시정지");
+
+                        Intent intent=new Intent(ToDoList2.this, MyTimerService.class);
+                        bindService(intent,connection,BIND_AUTO_CREATE);
+                        cur_Status=Run;
+                        new Thread(new GetTimerThread()).start();
                         cur_Status = Run;
                         break;
 
                     case Run: //움직이고 있을 때 멈춘다
                         flag = false;
-                        myTimer.removeMessages(0);
+                        unbindService(connection);
+                        cur_Status = Pause;
+                        //myTimer.removeMessages(0);
                         myPauseTime = SystemClock.elapsedRealtime();
                         stopbtn.setText("시작");
-                        cur_Status = Pause;
+
                         break;
 
                     case Pause: //시작한다
                         flag = true;
                         long now = SystemClock.elapsedRealtime();
-                        myTimer.sendEmptyMessage(0);
                         myBaseTime += (now - myPauseTime);
+                        intent=new Intent(ToDoList2.this, MyTimerService.class);
+                        bindService(intent,connection,BIND_AUTO_CREATE);
+
+                        cur_Status=Run;
+                        new Thread(new GetTimerThread()).start();
+
+                        //  myTimer.sendEmptyMessage(0);
+
                         stopbtn.setText("일시정지");
-                        cur_Status = Run;
+
                         break;
                 }
                 break;
             case R.id.completebtn:
                 flag = false;
-                myTimer.removeMessages(0);
+               // myTimer.removeMessages(0);
+                unbindService(connection);
+                cur_Status=Run;
+
                 long now=System.currentTimeMillis();
                 Date mDate=new Date(now);
                 SimpleDateFormat simpleDate=new SimpleDateFormat("HH:mm:ss");
@@ -398,7 +439,7 @@ public class ToDoList2 extends AppCompatActivity {
                 saveData1();
 
                 output.setText("00 : 00 : 00");
-                cur_Status = Init;
+               // cur_Status = Init;
                 stopbtn.setText("시작");
                 myCount = 1;
 
@@ -406,26 +447,52 @@ public class ToDoList2 extends AppCompatActivity {
         }
     }
 
-    Handler myTimer = new Handler() {
+   /* Handler myTimer = new Handler() {
         @SuppressLint("HandlerLeak")
         public void handleMessage(Message msg) {
             output.setText(getTimeOut());
             myTimer.sendEmptyMessage(0);
         }
-    };
+    };*/
 
-    String getTimeOut() {
-        long now = SystemClock.elapsedRealtime();
-        long outTime = now - myBaseTime;
+/*    String getTimeOut(int time) {
+      //  long now = SystemClock.elapsedRealtime();
+        //long outTime = now - myBaseTime;
 
-        long sec = outTime / 1000;
+        long sec = time / 1000;
         long min = sec / 60;
         long hour = min / 60;
         sec = sec % 60;
 
         String real_outTime = String.format("%02d : %02d : %02d", hour, min, sec);
         return real_outTime;
-    }
+    }*/
+
+   private class GetTimerThread implements Runnable{
+
+       private Handler handler=new Handler();
+       @Override
+       public void run() {
+           while(cur_Status==Run){
+               if(binder==null) continue;
+               handler.post(new Runnable() {
+                   @Override
+                   public void run() {
+                       try{
+                           output.setText(binder.getCount()+"");
+                       } catch (RemoteException e) {
+                           e.printStackTrace();
+                       }
+                   }
+               });
+               try{
+                   Thread.sleep(500);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+           }
+       }
+   }
 
     private void saveData1() {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
