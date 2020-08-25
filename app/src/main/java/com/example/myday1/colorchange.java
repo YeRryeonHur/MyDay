@@ -1,9 +1,11 @@
 package com.example.myday1;
 
+import android.appwidget.AppWidgetManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -82,10 +84,18 @@ public class colorchange extends AppCompatActivity {
         iv_btn = button.getBackground();
         iv_btn.setColorFilter(filter);
 
+        iv_btn=tv1.getBackground();
+        filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        tv1.setTextColor(Color.BLACK);
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openColorPicker();
+
+
             }
         });
         button_info.setOnClickListener(new View.OnClickListener(){
@@ -208,14 +218,35 @@ public class colorchange extends AppCompatActivity {
                         iv_btn=btn4.getBackground();
                         iv_btn.setColorFilter(filter);
 
+                        iv_btn=tv1.getBackground();
+                        filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+                        iv_btn.setColorFilter(filter);
+                        tv1.setTextColor(Color.BLACK);
+
+
                         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putInt("key2", color);
                         editor.commit();
 
+                        button.setBackgroundColor(color);
+                        button_info.setBackgroundColor(color);
+
                         if(Build.VERSION.SDK_INT >= 21){
                             getWindow().setStatusBarColor(color);
                         }
+
+
+
+
+                        Intent intent = new Intent(colorchange.this, NewAppWidget.class);
+                        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                        intent.putExtra("color", color);
+                        colorchange.this.sendBroadcast(intent);
+                        Log.i("과연", "success");
+
+
+
                     }
 
                     @Override

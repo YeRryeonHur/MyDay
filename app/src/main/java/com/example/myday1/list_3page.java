@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -172,6 +173,7 @@ public class list_3page extends Activity {
         });
 
         listview.setSelector(new PaintDrawable(color));
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
@@ -192,6 +194,10 @@ public class list_3page extends Activity {
         String []arr = resources.getStringArray(R.array.goodsaying);
         tv1 = (TextView)findViewById(R.id.saying);
         tv1.setText(arr[list]);
+        iv_btn=tv1.getBackground();
+        filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        tv1.setTextColor(Color.BLACK);
 
         if(exist()){
             fab.setVisibility(View.INVISIBLE);
@@ -238,8 +244,10 @@ public class list_3page extends Activity {
             year_a = day_write/10000;
             month_a = (day_write/100)%100;
             day_a = day_write%100;
+
             date.setText("20"+String.valueOf(year_a)+"년"+String.valueOf(month_a)+"월"+String.valueOf(day_a)+"일");
             emojic = data.getEmot();
+
             if(emojic == 1){
                 iv.setImageResource(R.drawable.laugh);
             }

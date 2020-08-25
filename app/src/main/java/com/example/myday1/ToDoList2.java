@@ -99,7 +99,7 @@ public class ToDoList2 extends AppCompatActivity {
         output = findViewById(R.id.time_out);
         completebtn = findViewById(R.id.completebtn);
         stopbtn = findViewById(R.id.stopbtn);
-
+        tv1 = findViewById(R.id.saying);
       pref=getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", -8331542);
 
@@ -131,6 +131,11 @@ public class ToDoList2 extends AppCompatActivity {
 
         iv_btn=stopbtn.getBackground();
         iv_btn.setColorFilter(filter);
+
+
+        iv_btn=tv1.getBackground();
+        iv_btn.setColorFilter(filter);
+        tv1.setTextColor(Color.BLACK);
 
         completebtn.setAlpha(0.75f);
         stopbtn.setAlpha(0.75f);

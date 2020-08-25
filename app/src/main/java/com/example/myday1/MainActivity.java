@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -117,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView iv_last =  (ImageView)findViewById(R.id.iv_lastmonth);
         ImageView iv_next =  (ImageView)findViewById(R.id.iv_nextmonth);
+
+        iv_btn=tv1.getBackground();
+        filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        tv1.setTextColor(Color.BLACK);
 
         iv_last.setColorFilter(null);
         iv_last.setColorFilter(color, PorterDuff.Mode.SRC_IN);

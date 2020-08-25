@@ -3,8 +3,11 @@ package com.example.myday1;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -19,53 +22,58 @@ import android.widget.TextView;
  * Implementation of App Widget functionality.
  */
 public class NewAppWidget extends AppWidgetProvider {
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    String arr[] = MainActivity.arr;
+    int list = MainActivity.list;
 
-        int list = MainActivity.list;
-        int color = MainActivity.color;
-        String arr[];
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        views.setTextColor(R.id.button1, color);
-        views.setTextColor(R.id.button2, color);
-        views.setTextColor(R.id.button3, color);
-        views.setTextColor(R.id.button4, color);
-
-        arr = MainActivity.arr;
-
-        views.setTextViewText(R.id.saying, arr[list]);
-
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pending = PendingIntent.getActivity(context, 0, intent, 0);
-        views.setOnClickPendingIntent(R.id.button1, pending);
-
-        Intent intent2 = new Intent(context, ToDoList1.class);
-        PendingIntent pending2 = PendingIntent.getActivity(context, 0, intent2, 0);
-        views.setOnClickPendingIntent(R.id.button2, pending2);
-
-        Intent intent3 = new Intent(context, list_3page.class);
-        PendingIntent pending3 = PendingIntent.getActivity(context, 0, intent3, 0);
-        views.setOnClickPendingIntent(R.id.button3, pending3);
-
-        Intent intent4 = new Intent(context, colorchange.class);
-        PendingIntent pending4 = PendingIntent.getActivity(context, 0, intent4, 0);
-        views.setOnClickPendingIntent(R.id.button4, pending4);
-
-
-
-
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
+
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+            int prev_col;
+            prev_col=MainActivity.color;
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+            int color = sharedPreferences.getInt("key2", prev_col);
+
+            views.setTextColor(R.id.button1, color);
+            views.setTextColor(R.id.button2, color);
+            views.setTextColor(R.id.button3, color);
+            views.setTextColor(R.id.button4, color);
+
+            views.setTextViewText(R.id.saying, arr[list]);
+
+            Intent intent5 = new Intent(context, MainActivity.class);
+            PendingIntent pending = PendingIntent.getActivity(context, 0, intent5, 0);
+            views.setOnClickPendingIntent(R.id.button1, pending);
+
+            Intent intent2 = new Intent(context, ToDoList1.class);
+            PendingIntent pending2 = PendingIntent.getActivity(context, 0, intent2, 0);
+            views.setOnClickPendingIntent(R.id.button2, pending2);
+
+
+            Intent intent3 = new Intent(context, list_3page.class);
+            PendingIntent pending3 = PendingIntent.getActivity(context, 0, intent3, 0);
+            views.setOnClickPendingIntent(R.id.button3, pending3);
+
+            Intent intent4 = new Intent(context, colorchange.class);
+            PendingIntent pending4 = PendingIntent.getActivity(context, 0, intent4, 0);
+            views.setOnClickPendingIntent(R.id.button4, pending4);
+
+            Intent newintent = new Intent(context, MainActivity.class);
+            PendingIntent pending5 = PendingIntent.getActivity(context, 0, intent4, 0);
+            views.setOnClickPendingIntent(R.id.saying, pending5);
+
+
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+
         }
+
     }
+
+
+
 
     @Override
     public void onEnabled(Context context) {
@@ -76,5 +84,18 @@ public class NewAppWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
+    @Override public void onReceive(Context context, Intent intent) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName myWidget = new ComponentName(context.getPackageName(), NewAppWidget.class.getName());
+        int[] widgetIds = appWidgetManager.getAppWidgetIds(myWidget);
+        String action = intent.getAction();
+        //업데이트 액션이 들어오면
+        if(action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)){
+            this.onUpdate(context, AppWidgetManager.getInstance(context), widgetIds); // onUpdate 호출
+             }
+             }
+
+
 }
 

@@ -2,6 +2,7 @@ package com.example.myday1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class other extends AppCompatActivity {
     Button button,button2;
     Button btn3, btn1, btn2, btn4;
     InputMethodManager imm;
+    TextView tv1;
     int color=100;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class other extends AppCompatActivity {
         button.setAlpha(0.66f);
         button2.setBackgroundColor(color);
         button2.setAlpha(0.75f);
-
+        tv1 = (TextView)findViewById(R.id.saying);
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
@@ -65,7 +68,10 @@ public class other extends AppCompatActivity {
         iv_btn=btn4.getBackground();
         iv_btn.setColorFilter(filter);
         //btn4.setAlpha(0.93f);
-
+        iv_btn=tv1.getBackground();
+        filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        tv1.setTextColor(Color.BLACK);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

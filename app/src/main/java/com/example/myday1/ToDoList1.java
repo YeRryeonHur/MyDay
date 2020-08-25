@@ -141,6 +141,10 @@ public class ToDoList1 extends AppCompatActivity {
         String []arr = resources.getStringArray(R.array.goodsaying);
         tv1 = (TextView)findViewById(R.id.saying);
         tv1.setText(arr[list2]);
+        iv_btn=tv1.getBackground();
+        filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
+        iv_btn.setColorFilter(filter);
+        tv1.setTextColor(Color.BLACK);
         memotext = findViewById(R.id.memo);
         memotext.setMovementMethod(new ScrollingMovementMethod());
         loadData();
