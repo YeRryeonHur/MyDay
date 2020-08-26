@@ -114,7 +114,7 @@ public class TimeTable extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                Intent intent = new Intent(getApplicationContext(), ToDoList2.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
                 finish();

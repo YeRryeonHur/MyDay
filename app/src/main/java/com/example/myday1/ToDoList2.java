@@ -1,6 +1,7 @@
 package com.example.myday1;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -33,6 +34,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -41,6 +43,9 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -55,17 +60,20 @@ public class ToDoList2 extends AppCompatActivity {
     private ListView listView;
     private MyAdapter Adapter;
     private String doingnow, start_time, finish_time; //지금 하고 있는 것
-    Button btn3, btn1, btn2, btn4;
+    Button btn3, btn1, btn2, btn4,add_button;
     private TextView output;
     int color=-8331542;
     private Button completebtn,stopbtn;
-    public static boolean flag=true;
+    public static boolean flag=false;
+    public static Activity todolist2;
     TextView tv1;
     final static int Init = 0;
     final static int Run = 1;
     final static int Pause = 2;
 
-    int cur_Status; //현재의 상태를 저장할변수를 초기화함.
+    boolean choose=false;
+
+    public static int cur_Status; //현재의 상태를 저장할변수를 초기화함.
     int myCount = 1;
     public static long myBaseTime;
     long myPauseTime;
@@ -90,8 +98,7 @@ public class ToDoList2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.to_do_list2);
-        saveData2();
-        loadData();
+
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
@@ -99,10 +106,13 @@ public class ToDoList2 extends AppCompatActivity {
         output = findViewById(R.id.time_out);
         completebtn = findViewById(R.id.completebtn);
         stopbtn = findViewById(R.id.stopbtn);
+        add_button=findViewById(R.id.add);
+
         tv1 = findViewById(R.id.saying);
-      pref=getSharedPreferences("pref", MODE_PRIVATE);
+        pref=getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", -8331542);
 
+        todolist2=ToDoList2.this;
 
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
@@ -132,6 +142,8 @@ public class ToDoList2 extends AppCompatActivity {
         iv_btn=stopbtn.getBackground();
         iv_btn.setColorFilter(filter);
 
+        //iv_btn=add_button.getBackground();
+       // iv_btn.setColorFilter(filter);
 
         iv_btn=tv1.getBackground();
         iv_btn.setColorFilter(filter);
@@ -178,10 +190,20 @@ public class ToDoList2 extends AppCompatActivity {
             }
         });
 
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+            }
+        });
 
 
+        loadData2();
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);
-
+        saveData2();
+        loadData();
         listView = findViewById(R.id.list);
         listView.setAdapter(Adapter);
         listView.invalidate();
@@ -189,6 +211,22 @@ public class ToDoList2 extends AppCompatActivity {
     }
 
 
+    public void loadData2()  {
+        SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
+        String json = preferences.getString(curDate+"2", null);
+        if (json != null) {
+            try {
+                JSONArray a = new JSONArray(json);
+                ToDoList1.list.clear();
+                for (int i = 0; i < a.length(); i++) {
+                    String url = a.optString(i);
+                    ToDoList1.list.add(url);
+                }
+            }catch(JSONException e){
+                e.printStackTrace();
+            }
+        }
+    }
 
     class MyAdapter extends BaseAdapter implements View.OnClickListener {
         private Context context;
@@ -242,48 +280,55 @@ public class ToDoList2 extends AppCompatActivity {
 
 
             final View finalConvertView = convertView;
+
             first.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    alert = new AlertDialog.Builder(context);
-                    alert.setTitle("프로그램");
-                    alert
-                            .setMessage("시작할까?")
-                            .setCancelable(false)
-                            .setPositiveButton("시작", new DialogInterface.OnClickListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //intent(pos);
-                                    doingnow=(String)Adapter.getItem(pos);
-                                    TextView tt1=(TextView)finalConvertView.findViewById(R.id.listtext);
-                                    tt1.setTextColor(color);
+                    if (choose == false) {
+                        alert = new AlertDialog.Builder(context);
+                        alert.setTitle("프로그램");
+                        alert
+                                .setMessage("시작할까?")
+                                .setCancelable(false)
+                                .setPositiveButton("시작", new DialogInterface.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //intent(pos);
+                                        doingnow = (String) Adapter.getItem(pos);
+                                        TextView tt1 = (TextView) finalConvertView.findViewById(R.id.listtext);
+                                        tt1.setTextColor(color);
+                                        choose = true;
+                                        flag = true;
+                                        myBaseTime = SystemClock.elapsedRealtime();
 
-                                    myBaseTime = SystemClock.elapsedRealtime();
-                                  // myTimer.sendEmptyMessage(0);
-                                    Intent intent=new Intent(ToDoList2.this, MyTimerService.class);
-                                    bindService(intent,connection,BIND_AUTO_CREATE);
-                                    cur_Status=Run;
-                                    new Thread(new GetTimerThread()).start();
+                                        // myTimer.sendEmptyMessage(0);
+                                        Intent intent = new Intent(ToDoList2.this, MyTimerService.class);
+                                        bindService(intent, connection, BIND_AUTO_CREATE);
+                                        cur_Status = Run;
+                                        new Thread(new GetTimerThread()).start();
 
-                                    long now=System.currentTimeMillis();
-                                    Date mDate=new Date(now);
-                                    SimpleDateFormat simpleDate=new SimpleDateFormat("HH:mm:ss");
-                                    start_time=simpleDate.format(mDate);
+                                        long now = System.currentTimeMillis();
+                                        Date mDate = new Date(now);
+                                        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm:ss");
+                                        start_time = simpleDate.format(mDate);
 
-
-                                    boolean noti = PreferenceManager.getBoolean(ToDoList2.this, "alert");
-                                    if(noti) showNoti();
-                                }
-                            })
-                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alertDialog = alert.create();
-                    alertDialog.show();
+                                        boolean noti = PreferenceManager.getBoolean(ToDoList2.this, "alert");
+                                        if (noti) showNoti();
+                                    }
+                                })
+                                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alertDialog = alert.create();
+                        alertDialog.show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"완료 버튼을 누르세요.",Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             });
@@ -313,10 +358,16 @@ public class ToDoList2 extends AppCompatActivity {
                                     if (count > 0) {
                                         checked[0] = pos;
                                         if (checked[0] > -1 && checked[0] < count) {
-                                            Log.i("인덱스: ", String.valueOf(checked[0]));
-                                            finalConvertView.setBackgroundColor(Color.WHITE);
-                                            ToDoList1.list.remove(checked[0]);
-                                            Adapter.notifyDataSetChanged();
+                                            TextView tt2 = (TextView) finalConvertView.findViewById(R.id.listtext);
+                                            String text=(String)tt2.getText();
+                                            if(text.equals(doingnow)){
+                                                Toast.makeText(getApplicationContext(),"완료 버튼을 누르세요.", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else {//   Log.i("인덱스: ", String.valueOf(checked[0]));
+                                                finalConvertView.setBackgroundColor(Color.WHITE);
+                                                ToDoList1.list.remove(checked[0]);
+                                                Adapter.notifyDataSetChanged();
+                                            }
                                         }
                                     } else {
                                         listView.setBackgroundColor(Color.CYAN);
@@ -352,7 +403,6 @@ public class ToDoList2 extends AppCompatActivity {
         Gson gson = new Gson();
         String json = preferences.getString(curDate, null);
 
-
         Type type = new TypeToken<ArrayList<ListViewItem>>() {
         }.getType();
         if (gson.fromJson(json, type) != null) {
@@ -361,6 +411,14 @@ public class ToDoList2 extends AppCompatActivity {
 
     }
 
+    private void saveData1() {
+        SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(sendArr);
+        editor.putString(curDate, json);
+        editor.apply();
+    }
 
     public void saveData2() {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
@@ -381,72 +439,78 @@ public class ToDoList2 extends AppCompatActivity {
     public void myonclick(View v) {
         switch (v.getId()) {
             case R.id.stopbtn:
-                switch (cur_Status) {
-                    case Init:
-                        flag = true;
+                if(choose==true) {
+                    switch (cur_Status) {
+                        case Init:
+                            flag = true;
+                            myBaseTime = SystemClock.elapsedRealtime();
+                            // myTimer.sendEmptyMessage(0);
+                            stopbtn.setText("일시정지");
+                            Intent intent = new Intent(ToDoList2.this, MyTimerService.class);
+                            bindService(intent, connection, BIND_AUTO_CREATE);
+                            cur_Status = Run;
+                            new Thread(new GetTimerThread()).start();
+                            break;
+
+                        case Run: //움직이고 있을 때 멈춘다
+                            myPauseTime = SystemClock.elapsedRealtime();
+                            flag = false;
+                            unbindService(connection);
+                            cur_Status = Pause;
+                            //myTimer.removeMessages(0);
+
+                            stopbtn.setText("시작");
+
+                            break;
+
+                        case Pause: //시작한다
+                            flag = true;
+                            long now = SystemClock.elapsedRealtime();
+                            myBaseTime += (now - myPauseTime);
+                            intent = new Intent(ToDoList2.this, MyTimerService.class);
+                            bindService(intent, connection, BIND_AUTO_CREATE);
+
+                            cur_Status = Run;
+                            new Thread(new GetTimerThread()).start();
+
+                            //  myTimer.sendEmptyMessage(0);
+                            stopbtn.setText("일시정지");
+                            break;
+                    }
+                    break;
+                }
+            case R.id.completebtn:
+                if(choose==true) {
+                    cur_Status=4;
+                    choose=false;
+
+
+                    if(flag==true){
+                        unbindService(connection);
+                        flag=false;
                         myBaseTime = SystemClock.elapsedRealtime();
 
-                       // myTimer.sendEmptyMessage(0);
-                        stopbtn.setText("일시정지");
+                    }
+                    stopbtn.setText("일시정지");
+                    // myTimer.removeMessages(0);
+                    long now = System.currentTimeMillis();
+                    Date mDate = new Date(now);
+                    SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm:ss");
+                    finish_time = simpleDate.format(mDate);
 
-                        Intent intent=new Intent(ToDoList2.this, MyTimerService.class);
-                        bindService(intent,connection,BIND_AUTO_CREATE);
-                        cur_Status=Run;
-                        new Thread(new GetTimerThread()).start();
-                        cur_Status = Run;
-                        break;
+                    /**
+                     *sendArr에 저장 (한 일, 시작 시각, 나중시각)
+                     */
+                    ListViewItem item = new ListViewItem(doingnow, start_time + "," + finish_time);
+                    sendArr.add(item);
 
-                    case Run: //움직이고 있을 때 멈춘다
-                        flag = false;
-                        unbindService(connection);
-                        cur_Status = Pause;
-                        //myTimer.removeMessages(0);
-                        myPauseTime = SystemClock.elapsedRealtime();
-                        stopbtn.setText("시작");
+                    listView.setAdapter(Adapter);
+                    saveData1();
 
-                        break;
-
-                    case Pause: //시작한다
-                        flag = true;
-                        long now = SystemClock.elapsedRealtime();
-                        myBaseTime += (now - myPauseTime);
-                        intent=new Intent(ToDoList2.this, MyTimerService.class);
-                        bindService(intent,connection,BIND_AUTO_CREATE);
-
-                        cur_Status=Run;
-                        new Thread(new GetTimerThread()).start();
-
-                        //  myTimer.sendEmptyMessage(0);
-
-                        stopbtn.setText("일시정지");
-
-                        break;
+                    output.setText("00 : 00 : 00");
+                    myCount = 1;
                 }
-                break;
-            case R.id.completebtn:
-                flag = false;
-               // myTimer.removeMessages(0);
-                unbindService(connection);
-                cur_Status=Run;
 
-                long now=System.currentTimeMillis();
-                Date mDate=new Date(now);
-                SimpleDateFormat simpleDate=new SimpleDateFormat("HH:mm:ss");
-                finish_time=simpleDate.format(mDate);
-
-                /**
-                 *sendArr에 저장 (한 일, 시작 시각, 나중시각)
-                 */
-                ListViewItem item=new ListViewItem(doingnow,start_time+","+finish_time);
-                sendArr.add(item);
-
-                listView.setAdapter(Adapter);
-                saveData1();
-
-                output.setText("00 : 00 : 00");
-               // cur_Status = Init;
-                stopbtn.setText("시작");
-                myCount = 1;
 
                 break;
         }
@@ -480,6 +544,7 @@ public class ToDoList2 extends AppCompatActivity {
        public void run() {
            while(cur_Status==Run){
                if(binder==null) continue;
+
                handler.post(new Runnable() {
                    @Override
                    public void run() {
@@ -499,14 +564,7 @@ public class ToDoList2 extends AppCompatActivity {
        }
    }
 
-    private void saveData1() {
-        SharedPreferences preferences = getSharedPreferences("sharedpreferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(sendArr);
-        editor.putString(curDate, json);
-        editor.apply();
-    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
     private boolean isScreenOn(){
@@ -534,6 +592,17 @@ public class ToDoList2 extends AppCompatActivity {
                 .setShowWhen(true);
         if(!isScreenOn()) builder.setContentIntent(pintent);
         manager.notify(1,builder.build());
+    }
+
+    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0,0);
+        finish();
+
     }
 
 

@@ -38,6 +38,7 @@ public class ToDoList1 extends AppCompatActivity {
     final static int CODE = 1;
     boolean std = false, bok = false, brk = false, fod = false, exe = false;
     public static ArrayList<String> list = new ArrayList<>();
+    ToDoList2 aActivity=(ToDoList2)ToDoList2.todolist2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,7 @@ public class ToDoList1 extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                aActivity.finish();
                 finish();
             }
         });
@@ -124,6 +126,7 @@ public class ToDoList1 extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                aActivity.finish();
                 finish();
             }
         });
@@ -133,9 +136,11 @@ public class ToDoList1 extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                aActivity.finish();
                 finish();
             }
         });
+
         int list2 = ((MainActivity)MainActivity.context).list;
         Resources resources = getResources();
         String []arr = resources.getStringArray(R.array.goodsaying);
@@ -148,6 +153,7 @@ public class ToDoList1 extends AppCompatActivity {
         memotext = findViewById(R.id.memo);
         memotext.setMovementMethod(new ScrollingMovementMethod());
         loadData();
+
         for(int i=0;i<list.size();i++) {
             if(list.get(i).equals("공부하기")) std=true;
             else if(list.get(i).equals("책 읽기")) bok=true;
@@ -228,6 +234,7 @@ public class ToDoList1 extends AppCompatActivity {
                 it.putStringArrayListExtra("list", list);
                 startActivity(it);
                 overridePendingTransition(0,0);
+                finish();
         }
     }
 
@@ -268,15 +275,5 @@ public class ToDoList1 extends AppCompatActivity {
         }
     }
 
-    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(0,0);
-        finish();
-
-    }
 
 }
