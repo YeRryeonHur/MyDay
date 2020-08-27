@@ -56,6 +56,7 @@ public class colorchange extends AppCompatActivity {
         layout3 = (LinearLayout) findViewById(R.id.bottom);
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+
         color = pref.getInt("key2", -8331542);
 
         if(Build.VERSION.SDK_INT >= 21){
