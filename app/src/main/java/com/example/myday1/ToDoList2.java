@@ -118,7 +118,6 @@ public class ToDoList2 extends AppCompatActivity {
             getWindow().setStatusBarColor(color);
         }
 
-
         Drawable iv_btn=btn1.getBackground();
         ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
         iv_btn.setColorFilter(filter);
@@ -198,7 +197,6 @@ public class ToDoList2 extends AppCompatActivity {
                 overridePendingTransition(0,0);
             }
         });
-
 
         loadData2();
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);
@@ -360,12 +358,14 @@ public class ToDoList2 extends AppCompatActivity {
                                         if (checked[0] > -1 && checked[0] < count) {
                                             TextView tt2 = (TextView) finalConvertView.findViewById(R.id.listtext);
                                             String text=(String)tt2.getText();
-                                            if(text.equals(doingnow)){
-                                                Toast.makeText(getApplicationContext(),"완료 버튼을 누르세요.", Toast.LENGTH_SHORT).show();
+                                            if(text.equals(doingnow) && flag==true) {
+                                                Toast.makeText(getApplicationContext(), "완료 버튼을 누르세요.", Toast.LENGTH_SHORT).show();
                                             }
                                             else {//   Log.i("인덱스: ", String.valueOf(checked[0]));
                                                 finalConvertView.setBackgroundColor(Color.WHITE);
                                                 ToDoList1.list.remove(checked[0]);
+                                                saveData2();
+
                                                 Adapter.notifyDataSetChanged();
                                             }
                                         }
@@ -428,12 +428,12 @@ public class ToDoList2 extends AppCompatActivity {
         editor.putString(curDate+"2", json);
         editor.apply();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         saveData2();
     }
-
 
     //스탑워치 구현
     public void myonclick(View v) {
@@ -604,6 +604,7 @@ public class ToDoList2 extends AppCompatActivity {
         finish();
 
     }
+
 
 
 }

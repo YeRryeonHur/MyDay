@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -152,7 +154,7 @@ public class ToDoList1 extends AppCompatActivity {
         tv1.setTextColor(Color.BLACK);
         memotext = findViewById(R.id.memo);
         memotext.setMovementMethod(new ScrollingMovementMethod());
-        loadData();
+        loadData2();
 
         for(int i=0;i<list.size();i++) {
             if(list.get(i).equals("공부하기")) std=true;
@@ -229,6 +231,7 @@ public class ToDoList1 extends AppCompatActivity {
                     }
 
                 }
+
                 it = new Intent(this, ToDoList2.class);
 
                 it.putStringArrayListExtra("list", list);
@@ -258,7 +261,7 @@ public class ToDoList1 extends AppCompatActivity {
         }
     }
 
-    public void loadData()  {
+    public void loadData2()  {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
         String json = preferences.getString(curDate+"2", null);
         if (json != null) {
