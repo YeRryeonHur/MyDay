@@ -89,19 +89,6 @@ public class ToDoList2 extends AppCompatActivity{
     public NotificationCompat.Builder builder;
     SharedPreferences pref;
 
-/*  private IMyTimerService binder;
-  private ServiceConnection connection=new ServiceConnection() {
-      @Override
-      public void onServiceConnected(ComponentName name, IBinder service) {
-          binder=IMyTimerService.Stub.asInterface(service);
-      }
-
-      @Override
-      public void onServiceDisconnected(ComponentName name) {
-
-      }
-  };*/
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.to_do_list2);
@@ -348,6 +335,22 @@ public class ToDoList2 extends AppCompatActivity{
         String json = gson.toJson(ToDoList1.list);
         editor.putString(curDate+"2", json);
         editor.apply();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        saveTimeData();
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        saveTimeData();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        saveTimeData();
     }
 
     class MyAdapter extends BaseAdapter implements View.OnClickListener {
