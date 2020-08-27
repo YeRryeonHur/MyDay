@@ -292,27 +292,30 @@ public class ToDoList2 extends AppCompatActivity {
                                     @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        //intent(pos);
-                                        doingnow = (String) Adapter.getItem(pos);
-                                        TextView tt1 = (TextView) finalConvertView.findViewById(R.id.listtext);
-                                        tt1.setTextColor(color);
-                                        choose = true;
-                                        flag = true;
-                                        myBaseTime = SystemClock.elapsedRealtime();
+                                        if (flag == true || choose == true) {
+                                            Toast.makeText(getApplicationContext(), "이미 실행 중 입니다.", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            doingnow = (String) Adapter.getItem(pos);
+                                            TextView tt1 = (TextView) finalConvertView.findViewById(R.id.listtext);
+                                            tt1.setTextColor(color);
+                                            choose = true;
+                                            flag = true;
+                                            myBaseTime = SystemClock.elapsedRealtime();
 
-                                        // myTimer.sendEmptyMessage(0);
-                                        Intent intent = new Intent(ToDoList2.this, MyTimerService.class);
-                                        bindService(intent, connection, BIND_AUTO_CREATE);
-                                        cur_Status = Run;
-                                        new Thread(new GetTimerThread()).start();
+                                            // myTimer.sendEmptyMessage(0);
+                                            Intent intent = new Intent(ToDoList2.this, MyTimerService.class);
+                                            bindService(intent, connection, BIND_AUTO_CREATE);
+                                            cur_Status = Run;
+                                            new Thread(new GetTimerThread()).start();
 
-                                        long now = System.currentTimeMillis();
-                                        Date mDate = new Date(now);
-                                        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm:ss");
-                                        start_time = simpleDate.format(mDate);
+                                            long now = System.currentTimeMillis();
+                                            Date mDate = new Date(now);
+                                            SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm:ss");
+                                            start_time = simpleDate.format(mDate);
 
-                                        boolean noti = PreferenceManager.getBoolean(ToDoList2.this, "alert");
-                                        if (noti) showNoti();
+                                            boolean noti = PreferenceManager.getBoolean(ToDoList2.this, "alert");
+                                            if (noti) showNoti();
+                                        }
                                     }
                                 })
                                 .setNegativeButton("취소", new DialogInterface.OnClickListener() {
