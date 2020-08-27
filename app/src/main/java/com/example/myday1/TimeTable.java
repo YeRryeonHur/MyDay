@@ -114,7 +114,7 @@ public class TimeTable extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ToDoList1.class);
+                Intent intent = new Intent(getApplicationContext(), ToDoList2.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
                 finish();
@@ -229,11 +229,15 @@ public class TimeTable extends AppCompatActivity {
 
             String[] start = start_time1.get(i).split(":");
 
+            if(start[0]==null||start[1]==null) continue;
+
             start_h = Integer.parseInt(start[0]);
             start_m = Integer.parseInt(start[1]);
             start_m /= 10;
 
             String[] finish = finish_time1.get(i).split(":");
+
+            if(finish[0]==null||finish[1]==null) continue;
 
             finish_h = Integer.parseInt(finish[0]);
             finish_m = Integer.parseInt(finish[1]);
@@ -254,12 +258,15 @@ public class TimeTable extends AppCompatActivity {
         for(int i = 0; i < start_time2.size(); i++){
             String[] start = start_time2.get(i).split(":");
 
+            if(start[0]==null||start[1]==null) continue;
+
             start_h = Integer.parseInt(start[0]);
+
             start_m = Integer.parseInt(start[1]);
             start_m /= 10;
 
             String[] finish = finish_time2.get(i).split(":");
-
+            if(finish[0]==null||finish[1]==null) continue;
             finish_h = Integer.parseInt(finish[0]);
             finish_m = Integer.parseInt(finish[1]);
             finish_m /= 10;

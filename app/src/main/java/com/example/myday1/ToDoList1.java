@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -38,6 +40,7 @@ public class ToDoList1 extends AppCompatActivity {
     final static int CODE = 1;
     boolean std = false, bok = false, brk = false, fod = false, exe = false;
     public static ArrayList<String> list = new ArrayList<>();
+    ToDoList2 aActivity=(ToDoList2)ToDoList2.todolist2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +118,7 @@ public class ToDoList1 extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                aActivity.finish();
                 finish();
             }
         });
@@ -124,6 +128,7 @@ public class ToDoList1 extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), list_3page.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                aActivity.finish();
                 finish();
             }
         });
@@ -133,9 +138,11 @@ public class ToDoList1 extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), colorchange.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);
+                aActivity.finish();
                 finish();
             }
         });
+
         int list2 = ((MainActivity)MainActivity.context).list;
         Resources resources = getResources();
         String []arr = resources.getStringArray(R.array.goodsaying);
@@ -147,7 +154,8 @@ public class ToDoList1 extends AppCompatActivity {
         tv1.setTextColor(Color.BLACK);
         memotext = findViewById(R.id.memo);
         memotext.setMovementMethod(new ScrollingMovementMethod());
-        loadData();
+        loadData2();
+
         for(int i=0;i<list.size();i++) {
             if(list.get(i).equals("공부하기")) std=true;
             else if(list.get(i).equals("책 읽기")) bok=true;
@@ -223,11 +231,13 @@ public class ToDoList1 extends AppCompatActivity {
                     }
 
                 }
+
                 it = new Intent(this, ToDoList2.class);
 
                 it.putStringArrayListExtra("list", list);
                 startActivity(it);
                 overridePendingTransition(0,0);
+                finish();
         }
     }
 
@@ -251,7 +261,7 @@ public class ToDoList1 extends AppCompatActivity {
         }
     }
 
-    public void loadData()  {
+    public void loadData2()  {
         SharedPreferences preferences = getSharedPreferences("sharedpreferences2", MODE_PRIVATE);
         String json = preferences.getString(curDate+"2", null);
         if (json != null) {
@@ -268,15 +278,5 @@ public class ToDoList1 extends AppCompatActivity {
         }
     }
 
-    //뒤로가기 버튼 눌렀을때 홈으로 이동하기 메소드
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(0,0);
-        finish();
-
-    }
 
 }

@@ -23,7 +23,7 @@ public class MyTimerService extends Service {
     public MyTimerService(){
 
     }
-   private String count;
+   private String count="00 : 00 : 00";
 
 
    IMyTimerService.Stub binder=new IMyTimerService.Stub() {
@@ -42,6 +42,7 @@ public class MyTimerService extends Service {
     public void onCreate()
     {
         super.onCreate();
+
         Thread Timer=new Thread(new Timer());
         Timer.start();
     }
@@ -52,6 +53,9 @@ public class MyTimerService extends Service {
     public void onDestroy()
     {
         super.onDestroy();
+        if(ToDoList2.cur_Status==4){
+            count="00 : 00 : 00";
+        }
         isStop=true;
     }
 
@@ -64,6 +68,9 @@ public class MyTimerService extends Service {
     @Override
     public boolean onUnbind(Intent intent){
         isStop=true;
+        if(ToDoList2.cur_Status==4){
+            count=" 00: 00 : 00 ";
+        }
         return super.onUnbind(intent);
     }
 
@@ -87,9 +94,9 @@ public class MyTimerService extends Service {
         @Override
         public void run() {
             while(true){
-                count=getTimeOut();
                 if(isStop) break;
 
+                count=getTimeOut();
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -97,7 +104,7 @@ public class MyTimerService extends Service {
                     }
                 });
                 try{
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }
