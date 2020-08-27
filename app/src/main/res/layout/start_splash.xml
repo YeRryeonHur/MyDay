@@ -9,8 +9,6 @@
         android:id="@+id/start"
         android:layout_width="218dp"
         android:layout_height="95dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
         android:layout_marginTop="124dp"
         android:layout_marginBottom="82dp"
         android:fontFamily="serif"
@@ -20,6 +18,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.186" />
