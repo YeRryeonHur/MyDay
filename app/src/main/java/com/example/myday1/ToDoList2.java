@@ -6,10 +6,12 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -46,6 +48,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -338,14 +341,37 @@ public class ToDoList2 extends AppCompatActivity{
     }
 
     @Override
-    public void onPause(){
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("naminsik"));
+        saveData2();
+        saveData1();
+
+    }
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            saveTimeData();
+
+            //CallYourMethod(message); 실행시킬 메소드를 전달 받은 데이터를 담아 호출하려면 이렇게 한다.
+        }
+    };
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
-        saveTimeData();
+        saveData1();
+        saveData2();
     }
     @Override
     public void onStop(){
         super.onStop();
         saveTimeData();
+        saveData1();
+        saveData2();
+
     }
     @Override
     public void onDestroy() {
@@ -532,12 +558,6 @@ public class ToDoList2 extends AppCompatActivity{
     }
 
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        saveData2();
-    }
 
     //스탑워치 구현
     public void myonclick(View v) {
