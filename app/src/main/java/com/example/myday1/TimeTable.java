@@ -75,6 +75,7 @@ public class TimeTable extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", -8331542);
 
+
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
         }
@@ -220,6 +221,7 @@ public class TimeTable extends AppCompatActivity {
     void coloring(){
         TextView set_color;
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+
         int color = pref.getInt("key2",-8331542 );
 
         int start_h, start_m, finish_h, finish_m;

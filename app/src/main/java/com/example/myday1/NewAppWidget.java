@@ -23,8 +23,9 @@ import android.widget.TextView;
  */
 
 public class NewAppWidget extends AppWidgetProvider {
-public static String arr[];
-public static int list;
+
+    public static String arr[];
+    public static int list;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
