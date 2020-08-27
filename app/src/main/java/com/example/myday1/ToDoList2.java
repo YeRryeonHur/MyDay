@@ -212,7 +212,8 @@ public class ToDoList2 extends AppCompatActivity{
             }
         });
 
-        loadData2();
+        if(ToDoList1.list.size()==0)
+            loadData2();
         Adapter = new MyAdapter(this, R.layout.to_do_list2_listview, ToDoList1.list);
         saveData2();
         loadData();
@@ -258,7 +259,8 @@ public class ToDoList2 extends AppCompatActivity{
             }
             //"00 : 00 : 00"
         }
-
+    preferences=getSharedPreferences("Start",MODE_PRIVATE);
+        start_time=preferences.getString("start_time",null);
     }
 
 
@@ -290,6 +292,12 @@ public class ToDoList2 extends AppCompatActivity{
         String s=temp+str+doingnow;
         editor.putString("Time", s); //key, value를 이용하여 저장하는 형태
         editor.commit(); //최종 커밋
+
+        preferences=getSharedPreferences("Start",MODE_PRIVATE);
+        editor=preferences.edit();
+        str=start_time;
+        editor.putString("start_time",str);
+        editor.commit();
     }
 
 
@@ -488,7 +496,7 @@ public class ToDoList2 extends AppCompatActivity{
                                             else {//   Log.i("인덱스: ", String.valueOf(checked[0]));
                                                 finalConvertView.setBackgroundColor(Color.WHITE);
                                                 ToDoList1.list.remove(checked[0]);
-                                                saveData2();
+                                               // saveData2();
 
                                                 Adapter.notifyDataSetChanged();
                                             }
@@ -585,7 +593,7 @@ public class ToDoList2 extends AppCompatActivity{
 
                     }
                     stopbtn.setText("일시정지");
-                     myTimer.removeMessages(0);
+                    myTimer.removeMessages(0);
 
                     long now = System.currentTimeMillis();
                     Date mDate = new Date(now);
