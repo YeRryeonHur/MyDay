@@ -55,7 +55,7 @@ public class TimeTable extends AppCompatActivity {
     private ArrayList<String>temp2=new ArrayList<>();
 
     //버튼 색 변경
-    int color = 0;
+    int color;
     Button btn3, btn1, btn2, btn4;
     public static Context context;
 
@@ -221,7 +221,7 @@ public class TimeTable extends AppCompatActivity {
     void coloring(){
         TextView set_color;
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        int color = pref.getInt("key2", 0);
+        int color = pref.getInt("key2",-8331542 );
 
         int start_h, start_m, finish_h, finish_m;
 

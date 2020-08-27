@@ -21,14 +21,16 @@ import android.widget.TextView;
 /**
  * Implementation of App Widget functionality.
  */
+
 public class NewAppWidget extends AppWidgetProvider {
-    String arr[] = MainActivity.arr;
-    int list = MainActivity.list;
+public static String arr[];
+public static int list;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
-
+        arr= MainActivity.arr;
+        list = MainActivity.list;
         for (int appWidgetId : appWidgetIds) {
             int prev_col;
             prev_col=MainActivity.color;
