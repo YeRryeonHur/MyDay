@@ -1,9 +1,12 @@
 package com.example.myday1;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +36,9 @@ public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로�
         }, 2000);//지속시간 2000밀리초로 지정하기
 
 
+        getStandardSize();
+        getScreenSize(this);
+        tv_start.setTextSize((float) (standardSize_X / 8));
     }
 
 
@@ -45,7 +51,24 @@ public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로�
     }
 
 
+    public Point getScreenSize(Activity activity){
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
 
+        return size;
+    }
+
+    int standardSize_X, standardSize_Y;
+    float density;
+
+    public void getStandardSize() {
+        Point ScreenSize = getScreenSize(this);
+        density  = getResources().getDisplayMetrics().density;
+
+        standardSize_X = (int) (ScreenSize.x / density);
+
+    }
 
 
 
