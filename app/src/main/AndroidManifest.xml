@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+
         android:usesCleartextTraffic="true">
         <receiver android:name=".NewAppWidget">
             <intent-filter>
@@ -23,25 +24,28 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
 
-        <activity android:name=".splash">
+        <activity android:name=".splash"
+            android:screenOrientation="portrait"
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ToDoList1" />
-        <activity android:name=".ToDoList2" />
-        <activity android:name=".other" />
-        <activity android:name=".colorchange" />
-        <activity android:name=".NewWriting" />
-        <activity android:name=".ReadDiary" />
-        <activity android:name=".list_3page" />
-        <activity android:name=".TimeTable" />
-        <service android:name=".MyTimerService"
-            android:enabled="true"
-            android:exported="true"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ToDoList1" android:screenOrientation="portrait" />
+        <activity android:name=".ToDoList2" android:screenOrientation="portrait" />
+        <activity android:name=".other" android:screenOrientation="portrait" />
+        <activity android:name=".colorchange" android:screenOrientation="portrait" />
+        <activity android:name=".NewWriting" android:screenOrientation="portrait" />
+        <activity android:name=".ReadDiary" android:screenOrientation="portrait" />
+        <activity android:name=".list_3page"  android:screenOrientation="portrait"/>
+        <activity android:name=".TimeTable"  android:screenOrientation="portrait"/>
+        <service android:name=".ForcedTerminationService"
+            android:stopWithTask="false"
+          />
     </application>
 
 </manifest>

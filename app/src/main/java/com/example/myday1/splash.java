@@ -13,6 +13,7 @@ public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로�
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_splash);
+        startService(new Intent(this,ForcedTerminationService.class));
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", -8331542);
         if(Build.VERSION.SDK_INT >= 21){
