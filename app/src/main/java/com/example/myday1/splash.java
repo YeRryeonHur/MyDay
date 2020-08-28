@@ -42,9 +42,6 @@ public class splash extends AppCompatActivity{//스플래쉬: 시작할 때 로�
     }
 
 
-
-
-
     @Override
     public void onBackPressed() {
         //스플래쉬 화면에서 뒤로가기 가기 금지

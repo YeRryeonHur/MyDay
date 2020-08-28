@@ -8,11 +8,11 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:layout_gravity="center">
     <TextView
         android:id="@+id/start"
-        android:layout_width="218dp"
+        android:layout_width="wrap_content"
         android:layout_height="95dp"
         android:fontFamily="serif"
         android:gravity="center"
@@ -28,12 +28,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingTop="20dp"
 
         android:layout_marginTop="100dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="107dp"
+            android:layout_width="wrap_content"
             android:layout_height="120dp"
             android:backgroundTint="#FF80cbc4"
             android:src="@drawable/calendar" />
