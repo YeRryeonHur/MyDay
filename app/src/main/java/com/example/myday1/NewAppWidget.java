@@ -33,6 +33,7 @@ public class NewAppWidget extends AppWidgetProvider {
         arr= MainActivity.arr;
         list = MainActivity.list;
         for (int appWidgetId : appWidgetIds) {
+
             int prev_col;
             prev_col=MainActivity.color;
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
