@@ -40,12 +40,15 @@ public class NewAppWidget extends AppWidgetProvider {
             SharedPreferences sharedPreferences = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
             int color = sharedPreferences.getInt("key2", prev_col);
 
+            SharedPreferences shared = context.getSharedPreferences("saying", Context.MODE_PRIVATE);
+            String sentence = shared.getString("sen", "");
+
             views.setTextColor(R.id.button1, color);
             views.setTextColor(R.id.button2, color);
             views.setTextColor(R.id.button3, color);
             views.setTextColor(R.id.button4, color);
 
-            views.setTextViewText(R.id.saying, arr[list]);
+            views.setTextViewText(R.id.saying, sentence);
 
             Intent intent5 = new Intent(context, MainActivity.class);
             PendingIntent pending = PendingIntent.getActivity(context, 0, intent5, 0);
@@ -65,7 +68,7 @@ public class NewAppWidget extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.button4, pending4);
 
             Intent newintent = new Intent(context, MainActivity.class);
-            PendingIntent pending5 = PendingIntent.getActivity(context, 0, intent4, 0);
+            PendingIntent pending5 = PendingIntent.getActivity(context, 0, newintent, 0);
             views.setOnClickPendingIntent(R.id.saying, pending5);
 
 

@@ -254,6 +254,13 @@ public class MainActivity extends AppCompatActivity {
         Resources resources = getResources();
         arr = resources.getStringArray(R.array.goodsaying);
         tv1.setText(arr[list]);
+
+        SharedPreferences saying = getSharedPreferences("saying", MODE_PRIVATE);
+        SharedPreferences.Editor editor = saying.edit();
+        editor.putString("sen", arr[list]);
+        editor.commit();
+
+
     }
 
 
