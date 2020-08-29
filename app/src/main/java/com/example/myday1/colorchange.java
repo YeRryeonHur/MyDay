@@ -31,7 +31,7 @@ import java.util.Calendar;
 import petrov.kristiyan.colorpicker.ColorPicker;
 
 public class colorchange extends AppCompatActivity {
-    private Button button, btn1, btn2, btn3, btn4, col_change, button_info;
+    private Button button, btn1, btn2, btn3, btn4, col_change, button_info, use_button;
     private LinearLayout layout1, layout2, layout3;
     private TextView top;
     TextView tv1;
@@ -47,6 +47,7 @@ public class colorchange extends AppCompatActivity {
         tv1.setText(arr[list]);
         button = (Button) findViewById(R.id.change);
         button_info = (Button)findViewById(R.id.information);
+        use_button=(Button)findViewById(R.id.use);
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
         btn3 = (Button)findViewById(R.id.btn3);
@@ -90,6 +91,18 @@ public class colorchange extends AppCompatActivity {
         iv_btn.setColorFilter(filter);
         tv1.setTextColor(Color.BLACK);
 
+        iv_btn = use_button.getBackground();
+        iv_btn.setColorFilter(filter);
+
+       use_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), How_Use.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

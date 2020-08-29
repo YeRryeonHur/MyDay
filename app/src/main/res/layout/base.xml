@@ -50,6 +50,14 @@
             android:layout_width="match_parent"
             android:src="@drawable/line"/>
         <Button
+            android:id="@+id/use"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용 방법"
+            android:textSize="20dp"
+            />
+
+        <Button
             android:id="@+id/information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

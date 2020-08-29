@@ -36,6 +36,7 @@
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ToDoList1" android:screenOrientation="portrait" />
+        <activity android:name=".How_Use" android:screenOrientation="portrait"/>
         <activity android:name=".ToDoList2" android:screenOrientation="portrait" />
         <activity android:name=".other" android:screenOrientation="portrait" />
         <activity android:name=".colorchange" android:screenOrientation="portrait" />
