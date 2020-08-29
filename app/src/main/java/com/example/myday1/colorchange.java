@@ -121,7 +121,7 @@ public class colorchange extends AppCompatActivity {
                 ad.setMessage(
                         "경북대학교 모바일 공학과 19학번\n" +
                         "박은화 성자민 이시언 허예련" +
-                        "\n로고 출처 : ...");
+                        "\n로고 출처 : FlatIcon(https://www.flaticon.com/)");
 
                 ad.setNegativeButton("BACK", new DialogInterface.OnClickListener() {
                     @Override
