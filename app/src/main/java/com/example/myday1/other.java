@@ -116,7 +116,7 @@ public class other extends AppCompatActivity {
         switch(id)
         {
             case R.id.finish:
-                final String TEXT=editmemo.getText().toString();
+                 final String TEXT=editmemo.getText().toString();
                 it.putExtra("TEXT",TEXT);
                 setResult(RESULT_OK,it);
                 finish();

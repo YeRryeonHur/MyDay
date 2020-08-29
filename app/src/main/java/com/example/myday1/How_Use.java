@@ -12,6 +12,7 @@ public class How_Use extends AppCompatActivity {
         setContentView(R.layout.how_use);
     }
 
+
     public void onBackPressed(){
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), colorchange.class);
