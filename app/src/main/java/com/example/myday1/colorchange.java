@@ -86,13 +86,14 @@ public class colorchange extends AppCompatActivity {
         iv_btn = button.getBackground();
         iv_btn.setColorFilter(filter);
 
-        iv_btn=tv1.getBackground();
-        filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
-        iv_btn.setColorFilter(filter);
-        tv1.setTextColor(Color.BLACK);
-
         iv_btn = use_button.getBackground();
         iv_btn.setColorFilter(filter);
+
+        iv_btn=tv1.getBackground();
+        iv_btn.setColorFilter(filter);
+
+        tv1.setTextColor(Color.BLACK);
+
 
        use_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +217,11 @@ public class colorchange extends AppCompatActivity {
                         // OK 버튼 클릭 시 이벤트
                         if(color == 0) return;
 
+
+                        /*button.setBackgroundColor(color);
+                        button_info.setBackgroundColor(color);
+                        use_button.setBackgroundColor(color);*/
+
                         Drawable iv_btn=btn1.getBackground();
                         ColorFilter filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
                         iv_btn.setColorFilter(filter);
@@ -233,9 +239,20 @@ public class colorchange extends AppCompatActivity {
                         iv_btn.setColorFilter(filter);
 
                         iv_btn=tv1.getBackground();
-                        filter=new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
                         iv_btn.setColorFilter(filter);
+
                         tv1.setTextColor(Color.BLACK);
+
+
+                        iv_btn=button.getBackground();
+                        iv_btn.setColorFilter(filter);
+
+                        iv_btn=button_info.getBackground();
+                        iv_btn.setColorFilter(filter);
+
+                        iv_btn=use_button.getBackground();
+                        iv_btn.setColorFilter(filter);
+
 
 
                         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -243,23 +260,15 @@ public class colorchange extends AppCompatActivity {
                         editor.putInt("key2", color);
                         editor.commit();
 
-                        button.setBackgroundColor(color);
-                        button_info.setBackgroundColor(color);
-
                         if(Build.VERSION.SDK_INT >= 21){
                             getWindow().setStatusBarColor(color);
                         }
-
-
-
 
                         Intent intent = new Intent(colorchange.this, NewAppWidget.class);
                         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                         intent.putExtra("color", color);
                         colorchange.this.sendBroadcast(intent);
                         Log.i("과연", "success");
-
-
 
                     }
 
