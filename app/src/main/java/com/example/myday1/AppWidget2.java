@@ -18,11 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
 /**
  * Implementation of App Widget functionality.
  */
 
-public class NewAppWidget extends AppWidgetProvider {
+public class AppWidget2 extends AppWidgetProvider {
 
     public static String arr[];
     public static int list;
@@ -30,13 +35,11 @@ public class NewAppWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
-        arr= MainActivity.arr;
-        list = MainActivity.list;
+
         for (int appWidgetId : appWidgetIds) {
 
-            int prev_col;
-            prev_col=MainActivity.color;
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+            
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget2);
 
             SharedPreferences sharedPreferences = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
             int color = sharedPreferences.getInt("key2", -8331542);
@@ -44,29 +47,31 @@ public class NewAppWidget extends AppWidgetProvider {
             SharedPreferences shared = context.getSharedPreferences("saying", Context.MODE_PRIVATE);
             String sentence = shared.getString("sen", "");
 
-            views.setTextColor(R.id.button1, color);
-            views.setTextColor(R.id.button2, color);
-            views.setTextColor(R.id.button3, color);
-            views.setTextColor(R.id.button4, color);
+            SharedPreferences today = context.getSharedPreferences("today", context.MODE_PRIVATE);
+            String str = today.getString("today_date", "");
+
+            views.setTextColor(R.id.todo, color);
+
 
             views.setTextViewText(R.id.saying, sentence);
-
-            Intent intent5 = new Intent(context, MainActivity.class);
-            PendingIntent pending = PendingIntent.getActivity(context, 0, intent5, 0);
-            views.setOnClickPendingIntent(R.id.button1, pending);
-
-            Intent intent2 = new Intent(context, ToDoList2.class);
-            PendingIntent pending2 = PendingIntent.getActivity(context, 0, intent2, 0);
-            views.setOnClickPendingIntent(R.id.button2, pending2);
+            SharedPreferences  preferences = context.getSharedPreferences("sharedpreferences2", Context.MODE_PRIVATE);
+            ArrayList<String> temp2 = new ArrayList<>();
 
 
-            Intent intent3 = new Intent(context, list_3page.class);
-            PendingIntent pending3 = PendingIntent.getActivity(context, 0, intent3, 0);
-            views.setOnClickPendingIntent(R.id.button3, pending3);
+            String json = preferences.getString(str+"2", null);
+            if (json != null) {
+                try {
+                    JSONArray a = new JSONArray(json);
+                    for (int i = 0; i < a.length(); i++) {
+                        String url = a.optString(i);
+                        temp2.add(url);
+                        views.setTextViewText(R.id.todo, temp2+"");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-            Intent intent4 = new Intent(context, colorchange.class);
-            PendingIntent pending4 = PendingIntent.getActivity(context, 0, intent4, 0);
-            views.setOnClickPendingIntent(R.id.button4, pending4);
 
             Intent newintent = new Intent(context, MainActivity.class);
             PendingIntent pending5 = PendingIntent.getActivity(context, 0, newintent, 0);
@@ -78,20 +83,6 @@ public class NewAppWidget extends AppWidgetProvider {
         }
 
     }
-
-
-
-
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-    }
-
-    @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
-
     @Override public void onReceive(Context context, Intent intent) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName myWidget = new ComponentName(context.getPackageName(), NewAppWidget.class.getName());
@@ -100,8 +91,9 @@ public class NewAppWidget extends AppWidgetProvider {
         //업데이트 액션이 들어오면
         if(action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)){
             this.onUpdate(context, AppWidgetManager.getInstance(context), widgetIds); // onUpdate 호출
-             }
-             }
+        }
+    }
+
 
 
 }

@@ -2,6 +2,7 @@ package com.example.myday1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -13,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,7 +36,7 @@ public class ToDoList1 extends AppCompatActivity {
     Button btn, start_btn;
     Button b1,b2,b3,b4,b5,b6;
     TextView memotext, tv1;
-    Button btn3, btn1, btn2, btn4;
+    Button btn3, btn1, btn2, btn4, next;
     Intent it;
     int color=-8331542;
     final static int CODE = 1;
@@ -143,6 +145,8 @@ public class ToDoList1 extends AppCompatActivity {
             }
         });
 
+
+
         int list2 = ((MainActivity)MainActivity.context).list;
         Resources resources = getResources();
         String []arr = resources.getStringArray(R.array.goodsaying);
@@ -238,6 +242,11 @@ public class ToDoList1 extends AppCompatActivity {
                 startActivity(it);
                 overridePendingTransition(0,0);
                 finish();
+
+
+                Intent intent = new Intent(ToDoList1.this, AppWidget2.class);
+                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                ToDoList1.this.sendBroadcast(intent);
         }
     }
 
