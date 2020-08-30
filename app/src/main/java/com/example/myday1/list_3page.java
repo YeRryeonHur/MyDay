@@ -172,15 +172,15 @@ public class list_3page extends Activity {
             }
         });
 
-        listview.setSelector(new PaintDrawable(color));
+        PaintDrawable pd2 = new PaintDrawable(color);
+        pd2.setAlpha(50);
+        listview.setSelector(pd2);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                view.setBackgroundColor(color);
                 Intent intent = new Intent(getApplicationContext(), ReadDiary.class);
                 day_write=list.get(position).getDate();
                 intent.putExtra("day_check", day_write);
