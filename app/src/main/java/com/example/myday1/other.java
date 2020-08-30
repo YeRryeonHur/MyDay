@@ -38,13 +38,10 @@ public class other extends AppCompatActivity {
         editmemo=findViewById(R.id.edit);
         imm.hideSoftInputFromWindow(editmemo.getWindowToken(),0);
         editmemo.setTextIsSelectable(true); //커서 보이게
-        editmemo.setShowSoftInputOnFocus(false); //키보드 숨겨짐
+       // editmemo.setShowSoftInputOnFocus(false); //키보드 숨겨짐
         button=findViewById(R.id.finish);
         button2=findViewById(R.id.cancel);
-        button.setBackgroundColor(color);
-        button.setAlpha(0.66f);
-        button2.setBackgroundColor(color);
-        button2.setAlpha(0.75f);
+
         tv1 = (TextView)findViewById(R.id.saying);
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
@@ -68,9 +65,16 @@ public class other extends AppCompatActivity {
         iv_btn=btn4.getBackground();
         iv_btn.setColorFilter(filter);
         //btn4.setAlpha(0.93f);
+        iv_btn=button.getBackground();
+        iv_btn.setColorFilter(filter);
+
+        iv_btn=button2.getBackground();
+        iv_btn.setColorFilter(filter);
         iv_btn=tv1.getBackground();
         filter=new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_IN);
         iv_btn.setColorFilter(filter);
+
+
         tv1.setTextColor(Color.BLACK);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
