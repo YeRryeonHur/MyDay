@@ -1,6 +1,8 @@
 package com.example.myday1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 public class How_Use extends AppCompatActivity {
     ViewPager vp;
+    int color;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,13 @@ public class How_Use extends AppCompatActivity {
         vp = (ViewPager)findViewById(R.id.viewPager);
         vp.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         vp.setCurrentItem(0);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        color = pref.getInt("key2", -8331542);
+        if(Build.VERSION.SDK_INT >= 21){
+            getWindow().setStatusBarColor(color);
+        }
+
+
     }
 
     View.OnClickListener movePageListener = new View.OnClickListener(){

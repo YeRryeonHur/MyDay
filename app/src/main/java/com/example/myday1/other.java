@@ -38,7 +38,7 @@ public class other extends AppCompatActivity {
         editmemo=findViewById(R.id.edit);
         imm.hideSoftInputFromWindow(editmemo.getWindowToken(),0);
         editmemo.setTextIsSelectable(true); //커서 보이게
-        editmemo.setShowSoftInputOnFocus(false); //키보드 숨겨짐
+        editmemo.setShowSoftInputOnFocus(true); //키보드 숨겨짐
         button=findViewById(R.id.finish);
         button2=findViewById(R.id.cancel);
         button.setBackgroundColor(color);
