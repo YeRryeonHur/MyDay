@@ -230,12 +230,14 @@ public class MainActivity extends AppCompatActivity {
                 /**
                  * 선택한 날짜 넣어주기
                  */
-
                 String[] strArr=tvDate.getText().toString().split("/");
 
                 String YEAR=strArr[0];
                 String MONTH=strArr[1];
                 String Day=String.valueOf(day);
+
+                if(!Day_in(YEAR, MONTH, day)) return;
+
                 if(day/10==0){
                     Day="0"+day;
                 }
@@ -478,5 +480,24 @@ public class MainActivity extends AppCompatActivity {
             finish();
             toast.cancel();
         }
+    }
+
+    //해당 날짜가 안에 있는지 검사하는 메소드
+    private boolean Day_in(String year, String month, int day){
+        if(day < 1) return false;
+        int m = Integer.parseInt(month);
+        int y = Integer.parseInt(year);
+
+        switch(m){
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                if(day > 31) return false;
+            case 4: case 6: case 9: case 11:
+                if(day > 30) return false;
+            case 2:
+                if(y%4 == 0 && day > 29) return false;
+                if(y%4 > 0 && day > 28) return false;
+        }
+
+        return true;
     }
 }
