@@ -117,11 +117,12 @@ public class colorchange extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 AlertDialog.Builder ad = new AlertDialog.Builder(colorchange.this);
-                ad.setTitle("개발자 정보");
+                ad.setTitle("기타 정보");
                 ad.setMessage(
-                        "경북대학교 모바일 공학과 19학번\n" +
-                        "박은화 성자민 이시언 허예련" +
-                        "\n로고 출처 : FlatIcon(https://www.flaticon.com/)");
+                        "다이어리 및 일정 관리 앱\n"+
+                        "경북대학교 모바일 공학과 19학번" +
+                        "\n로고 출처 : FlatIcon(https://www.flaticon.com/)"+
+                        "\nCopyright (c) 2016 Petrov Kristiyan\n");
 
                 ad.setNegativeButton("BACK", new DialogInterface.OnClickListener() {
                     @Override

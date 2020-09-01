@@ -236,17 +236,15 @@ public class ToDoList1 extends AppCompatActivity {
 
                 }
 
-                it = new Intent(this, ToDoList2.class);
 
+                it = new Intent(this, ToDoList2.class);
                 it.putStringArrayListExtra("list", list);
                 startActivity(it);
                 overridePendingTransition(0,0);
                 finish();
 
 
-                Intent intent = new Intent(ToDoList1.this, AppWidget2.class);
-                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                ToDoList1.this.sendBroadcast(intent);
+
         }
     }
 
