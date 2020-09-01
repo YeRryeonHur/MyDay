@@ -253,7 +253,8 @@ public class TimeTable extends AppCompatActivity {
 
             for(int j = START; j <= FINISH; j++){
                  set_color = getTextView(j);
-                  set_color.setBackgroundColor(color);
+                set_color.setSelected(true);
+                 set_color.setBackgroundColor(color);
 
                 if(j == START){
                      set_color.setText(schedule1.get(i));
@@ -281,8 +282,9 @@ public class TimeTable extends AppCompatActivity {
 
             for(int j = START; j <= FINISH; j++){
                  set_color = getTextView(j);
+                set_color.setSelected(true);
                  set_color.setBackgroundColor(color);
-                 set_color.setAlpha((float)0.5);
+                 set_color.setAlpha((float)0.7);
 
                 if(j == START){
                     set_color.setText(schedule2.get(i));
