@@ -113,6 +113,7 @@ public class colorchange extends AppCompatActivity {
 
             }
         });
+
         button_info.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

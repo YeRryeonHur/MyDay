@@ -237,6 +237,7 @@ public class ToDoList1 extends AppCompatActivity {
                 }
 
 
+
                 it = new Intent(this, ToDoList2.class);
                 it.putStringArrayListExtra("list", list);
                 startActivity(it);
