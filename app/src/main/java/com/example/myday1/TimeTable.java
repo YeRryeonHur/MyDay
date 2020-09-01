@@ -75,6 +75,11 @@ public class TimeTable extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         color = pref.getInt("key2", -8331542);
 
+        SharedPreferences today = getSharedPreferences("today", MODE_PRIVATE);
+        SharedPreferences.Editor editor = today.edit();
+        editor.putString("today_date", curDate);
+        editor.commit();
+
 
         if(Build.VERSION.SDK_INT >= 21){
             getWindow().setStatusBarColor(color);
