@@ -214,6 +214,7 @@ public class ReadDiary extends AppCompatActivity {
                         Button bt2 = (Button)findViewById(R.id.save);
                         Button bt3 = (Button)findViewById(R.id.delete);
 
+
                         bt1.setVisibility(View.GONE);
                         bt2.setVisibility(View.VISIBLE);
                         bt3.setVisibility(View.GONE);

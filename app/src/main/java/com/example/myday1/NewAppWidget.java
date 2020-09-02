@@ -55,6 +55,7 @@ public class NewAppWidget extends AppWidgetProvider {
             PendingIntent pending = PendingIntent.getActivity(context, 0, intent5, 0);
             views.setOnClickPendingIntent(R.id.button1, pending);
 
+
             Intent intent2 = new Intent(context, ToDoList2.class);
             PendingIntent pending2 = PendingIntent.getActivity(context, 0, intent2, 0);
             views.setOnClickPendingIntent(R.id.button2, pending2);
