@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyDay1</string>
+    <string name="app_name">하이 플랜</string>
     <string-array name="goodsaying">
         <item>명성을 쌓는 것에는 20년이란 세월이 걸리며 명성을 무너뜨리는 것에는 5분도 걸리지 않는다. 그걸 명심한다면 당신의 행동이 달라질 것이다. [워렌버핏]</item>
         <item>간단함이 훌륭함의 열쇠다. [이소룡]</item>

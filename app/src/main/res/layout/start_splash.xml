@@ -16,7 +16,7 @@
         android:layout_height="95dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="My Day"
+        android:text="High Plan"
         android:layout_gravity="center"
         android:textColor="#FF80cbc4"
         android:textSize="50sp"
